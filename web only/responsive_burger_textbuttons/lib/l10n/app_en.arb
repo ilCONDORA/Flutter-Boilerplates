@@ -1,0 +1,56 @@
+{
+  "@@locale": "en",
+  "language": "English",
+  "@language": {
+    "description": "Language of the Name of app/website in English US"
+  },
+  "app_name": "Name of app/website in English US",
+  "@app_name": {
+    "description": "Title of the Name of app/website in English US"
+  },
+  "localization_settings": "Localization Settings",
+  "@localization_settings": {
+    "description": "Title of the Localization Settings dialog, it appears when you click on the language_rounded icon in the navigation bar"
+  },
+  "select_language": "Select Language",
+  "@select_language": {
+    "description": "Title of the section inside the Localization Settings dialog, in which you can select the language"
+  },
+  "close_button": "Close",
+  "@close_button": {
+    "description": "Title of the button to close something"
+  },
+  "tab_products": "Products",
+  "@tab_products": {
+    "description": "Title of the Products tab of navigation bar"
+  },
+  "tooltip_open_side_menu": "Open side menu",
+  "@tooltip_open_side_menu": {
+    "description": "Tooltip message of the button to open the side menu"
+  },
+  "tooltip_navigation_button": "Go to page {label}",
+  "@tooltip_navigation_button": {
+    "description": "Tooltip message of navigation button",
+    "placeholders": {
+      "label": {
+        "description": "Navigation button label"
+      }
+    }
+  },
+  "tooltip_logo_navigation":"Logo - Go to home page",
+  "@tooltip_logo_navigation": {
+    "description": "Tooltip message of the logo in the navigation bar, when you click on the logo you go to the home page"
+  },
+  "tooltip_change_theme_button": "Button to change theme",
+  "@tooltip_change_theme_button": {
+    "description": "Tooltip message of the button to change theme"
+  },
+  "tooltip_change_language_menu": "Menu to change language",
+  "@tooltip_change_language_menu": {
+    "description": "Tooltip message of the menu to change language"
+  },
+  "tooltip_change_currency_menu": "Menu to change currency",
+  "@tooltip_change_currency_menu": {
+    "description": "Tooltip message of the menu to change currency"
+  }
+}

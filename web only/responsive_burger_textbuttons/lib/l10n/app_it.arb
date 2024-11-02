@@ -1,0 +1,56 @@
+{
+  "@@locale": "it",
+  "language": "Italiano",
+  "@language": {
+    "description": "Lingua del titolo dell'app/website in italiano IT"
+  },
+  "app_name": "Nome dell'app/sito web in italiano IT",
+  "@app_name": {
+    "description": "Titolo del nome dell'app/sito web in italiano IT"
+  },
+  "localization_settings": "Impostazioni di localizzazione",
+  "@localization_settings": {
+    "description": "Titolo della finestra di dialogo Impostazioni di localizzazione, che appare quando si clicca sull'icona language_rounded nella barra di navigazione"
+  },
+  "select_language": "Seleziona lingua",
+  "@select_language": {
+    "description": "Titolo della sezione all'interno della finestra di dialogo Impostazioni di localizzazione, in cui si può selezionare la lingua"
+  },
+  "close_button": "Chiudi",
+  "@close_button": {
+    "description": "Titolo del pulsante per la chiusura di qualcosa"
+  },
+  "tab_products": "Prodotti",
+  "@tab_products": {
+    "description": "Titolo della scheda Prodotti della barra di navigazione"
+  },
+  "tooltip_open_side_menu": "Apri menu laterale",
+  "@tooltip_open_side_menu": {
+    "description": "Messaggio tooltip del pulsante per l'apertura del menu laterale"
+  },
+  "tooltip_navigation_button": "Vai alla pagina {label}",
+  "@tooltip_navigation_button": {
+    "description": "Messaggio tooltip del pulsante di navigazione",
+    "placeholders": {
+      "label": {
+        "description": "Etichetta del pulsante di navigazione"
+      }
+    }
+  },
+  "tooltip_logo_navigation":"Logo - Vai alla pagina Home",
+  "@tooltip_logo_navigation": {
+    "description": "Messaggio tooltip del logo nella barra di navigazione, quando si clicca sul logo si va alla pagina Home"
+  },
+  "tooltip_change_theme_button": "Bottone per cambiare il tema",
+  "@tooltip_change_theme_button": {
+    "description": "Messaggio tooltip del pulsante per il cambio di tema"
+  },
+  "tooltip_change_language_menu": "Menu per cambiare la lingua",
+  "@tooltip_change_language_menu": {
+    "description": "Messaggio tooltip del menu per il cambio di lingua"
+  },
+  "tooltip_change_currency_menu": "Menu per cambiare la valuta",
+  "@tooltip_change_currency_menu": {
+    "description": "Messaggio tooltip del menu per il cambio di valuta"
+  }
+}
