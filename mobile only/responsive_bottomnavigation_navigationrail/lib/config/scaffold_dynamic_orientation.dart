@@ -26,9 +26,9 @@ class ScaffoldDynamicNavigationOrientation extends StatelessWidget {
   Widget build(BuildContext context) {
     return OrientationBuilder(
       builder: (context, orientation) {
-        bool isLandscape = orientation == Orientation.landscape;
+        bool isMoreWideThanTall = orientation == Orientation.landscape;
         return Scaffold(
-          body: isLandscape
+          body: isMoreWideThanTall
               ? Row(
                   children: [
                     NavigationRail(
@@ -54,7 +54,7 @@ class ScaffoldDynamicNavigationOrientation extends StatelessWidget {
                   ],
                 )
               : navigationShell,
-          bottomNavigationBar: isLandscape
+          bottomNavigationBar: isMoreWideThanTall
               ? null
               : BottomNavigationBar(
                   items: [
