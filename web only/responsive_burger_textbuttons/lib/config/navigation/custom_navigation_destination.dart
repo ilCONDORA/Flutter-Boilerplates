@@ -12,7 +12,7 @@ class CustomNavigationDestination {
   final String path;
   final String name;
   final String Function(BuildContext)?
-      labelBuilder; // Nuovo campo per la localizzazione
+      labelBuilder;
   final Widget screen;
   final bool showAsTab;
 

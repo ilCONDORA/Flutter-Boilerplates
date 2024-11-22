@@ -1,0 +1,65 @@
+name: r_b_r_d_w # responsive BottomNavigation NavigationRail Drawer and Web(responsive)
+description: "A new Flutter project."
+publish_to: "none"
+version: 0.1.0
+
+environment:
+  sdk: ^3.5.1
+
+dependencies:
+  flutter:
+    sdk: flutter
+  go_router: ^14.3.0
+  intl: ^0.19.0
+  flutter_localizations:
+    sdk: flutter
+  hydrated_bloc: ^9.1.5
+  flutter_bloc: ^8.1.6
+  country_flags: ^3.0.0
+  condora_automatic_getter_storage_directory: ^1.0.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+  package_rename: ^1.7.1
+
+flutter:
+  generate: true
+  uses-material-design: true
+  assets:
+    - assets/
+
+# Run 'dart run package_rename' in the terminal to apply the new package information
+package_rename_config:
+  android:
+    app_name: URBRDW # (String) The display name of the android app
+    package_name: it.ilcondora.urbrdw # (String) The package name of the android app
+    override_old_package: com.example.r_b_r_d_w # (Optional) (String) Use this to delete the old folder structure of MainActivity or to use the existing code with the new package name
+    lang: kotlin # (Optional) (String) The android development language {kotlin(default) or java}
+
+  ios:
+    app_name: URBRDW # (String) The display name of the ios app
+    bundle_name: urbrdw # (String) The bundle name of the ios app, maximum length should be 15 characters
+    package_name: it.ilcondora.urbrdw # (String) The product bundle identifier of the ios app
+
+  linux:
+    app_name: URBRDW # (String) The window title of the linux app
+    package_name: it.ilcondora.urbrdw # (String) The application id of the linux app
+    exe_name: urbrdw-linux-x64 # (String) The executable name (binary name) of the linux app
+
+  macos:
+    app_name: URBRDW # (String) The product name of the macos app
+    package_name: it.ilcondora.urbrdw # (String) The product bundle identifier of the macos app
+    copyright_notice: Copyright ©️ 2024 ilCONDORA. All rights reserved. # (String) The product copyright of the macos app
+
+  web:
+    app_name: URBRDW # (String) The title of the web app and PWA
+    short_app_name: # (String) The short display name of the PWA (Optional, defaults to app_name if not set)
+    description: Universal Boilerplate for automatic configuration of navigation # (String) The description of the web app and PWA
+
+  windows:
+    app_name: URBRDW # (String) The window title & software name of the windows app
+    organization: ilCONDORA # (String) The organization name (company name) of the windows app
+    copyright_notice: Copyright ©️ 2024 ilCONDORA. All rights reserved. # (String) The legal copyright of the windows app
+    exe_name: urbrdw-win64 # (String) The executable name (binary name) of the windows app

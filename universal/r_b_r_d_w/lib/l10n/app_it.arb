@@ -1,0 +1,35 @@
+{
+  "@@locale": "it",
+  "language": "Italiano",
+  "@language": {
+    "description": "Lingua del titolo dell'app/website in italiano IT"
+  },
+  "home_label": "Home",
+  "@home_label": {
+    "description": "Etichetta del pulsante di navigazione per la schermata home"
+  },
+  "products_label": "Prodotti",
+  "@products_label": {
+    "description": "Etichetta del pulsante di navigazione per la schermata prodotti"
+  },
+  "profile_label": "Profilo",
+  "@profile_label": {
+    "description": "Etichetta del pulsante di navigazione per la schermata profilo"
+  },
+  "tooltip_tap_again_to_go_to_the_beginning": "Tocca di nuovo per tornare all'inizio",
+  "@tooltip_tap_again_to_go_to_the_beginning": {
+    "description": "Tooltip per il tocca di nuovo per tornare all'inizio"
+  },
+  "tooltip_change_theme_button": "Bottone per cambiare il tema",
+  "@tooltip_change_theme_button": {
+    "description": "Messaggio tooltip del pulsante per il cambio di tema"
+  },
+  "tooltip_change_language_menu": "Menu per cambiare la lingua",
+  "@tooltip_change_language_menu": {
+    "description": "Messaggio tooltip del menu per il cambio di lingua"
+  },
+  "tooltip_change_currency_menu": "Menu per cambiare la valuta",
+  "@tooltip_change_currency_menu": {
+    "description": "Messaggio tooltip del menu per il cambio di valuta"
+  }
+}
