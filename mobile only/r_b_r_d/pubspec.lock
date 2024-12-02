@@ -61,10 +61,10 @@ packages:
     dependency: "direct main"
     description:
       name: condora_automatic_getter_storage_directory
-      sha256: a5169fd5ff87cc0d3ae46deadce35c0a1c023053eaf66e123d08c2366b6acbe4
+      sha256: "0f6746622862c472f9b8d65e078a407216ce043c85e95ece444a403c36ee70e4"
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.0"
+    version: "1.0.1"
   convert:
     dependency: transitive
     description:
@@ -97,14 +97,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.2"
-  dynamic_storage_directory:
-    dependency: "direct main"
-    description:
-      name: dynamic_storage_directory
-      sha256: "249064d302038e825b2b42808a6785a3d31cc278e8cda642adadcba09d3cd8a8"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.0.0"
   fake_async:
     dependency: transitive
     description:
@@ -334,7 +326,7 @@ packages:
     source: hosted
     version: "1.9.0"
   path_provider:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: path_provider
       sha256: "50c5dd5b6e1aaf6fb3a78b33f6aa3afca52bf903a8a5298f53101fdaee55bbcd"
