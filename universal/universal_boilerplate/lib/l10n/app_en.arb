@@ -1,0 +1,43 @@
+{
+  "@@locale": "en",
+  "language": "English",
+  "@language": {
+    "description": "Text that will be used under the flag in language settings"
+  },
+  "flag_not_found": "Flag not found",
+  "@flag_not_found": {
+    "description": "text that will be displayed if the flag is not found"
+  },
+  "tooltip_language_settings": "Language settings",
+  "@tooltip_language_settings": {
+    "description": "Tooltip text for PieAction for language settings"
+  },
+  "title_language_settings": "Language settings, select the desired language",
+  "@title_language_settings": {
+    "description": "title in the dialog for language settings"
+  },
+  "tooltip_currency_settings": "Currency settings",
+  "@tooltip_currency_settings": {
+    "description": "Tooltip text for PieAction for currency settings"
+  },
+  "title_currency_settings": "Currency settings, select the desired currency",
+  "@title_currency_settings": {
+    "description": "title in the dialog for currency settings"
+  },
+  "tooltip_change_theme": "Change theme",
+  "@tooltip_change_theme": {
+    "description": "Tooltip text for PieAction for changing the theme"
+  },
+  "exit": "Exit",
+  "@exit": {
+    "description": "Label for the Exit button"
+  },
+  "home_label": "Home",
+  "@home_label": {
+    "description": "Label for the button for navigating to the home screen"
+  },
+  "info_label": "Info",
+  "@info_label": {
+    "description": "Label for the button for navigating to the info screen"
+  }
+}

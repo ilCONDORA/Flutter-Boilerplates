@@ -1,0 +1,72 @@
+name: universal_boilerplate
+description: "Boilerplate for Flutter projects for all platforms"
+publish_to: "none"
+version: 1.0.0
+
+environment:
+  sdk: ^3.6.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+  intl: ^0.19.0 # localization, there's a new version but flutter_localizations must use 0.19
+  flutter_localizations: # localization
+    sdk: flutter
+  google_fonts: ^6.2.1
+  flutter_bloc: ^9.0.0
+  hydrated_bloc: ^10.0.0
+  condora_automatic_getter_storage_directory: ^1.0.1 # automatic storage directory
+  go_router: ^14.6.3 # routing/navigation
+  pie_menu: ^3.2.7 # circular menu for settings
+  currency_formatter: ^2.2.2 # get currency based on country code
+  flag: ^7.0.0 # get flag based on country code
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+  package_rename: ^1.8.0
+  icons_launcher: ^3.0.0
+
+flutter:
+  generate: true
+  uses-material-design: true
+  assets:
+    - assets/
+
+# Run 'dart run package_rename' in the terminal to apply the new package information
+package_rename_config:
+  android:
+    app_name: UniBoil # (String) The display name of the android app
+    package_name: it.ilcondora.uniboil # (String) The package name of the android app
+    override_old_package: # (Optional) (String) Use this to delete the old folder structure of MainActivity or to use the existing code with the new package name
+    lang: # (Optional) (String) The android development language {kotlin(default) or java}
+
+  ios:
+    app_name: UniBoil # (String) The display name of the ios app
+    bundle_name: uniboil # (String) The bundle name of the ios app, maximum length should be 15 characters
+    package_name: it.ilcondora.uniboil # (String) The product bundle identifier of the ios app
+
+  linux:
+    app_name: UniBoil # (String) The window title of the linux app
+    package_name: it.ilcondora.uniboil # (String) The application id of the linux app
+    exe_name: uniboil-linux # (String) The executable name (binary name) of the linux app
+
+  macos:
+    app_name: UniBoil # (String) The product name of the macos app
+    package_name: it.ilcondora.uniboil # (String) The product bundle identifier of the macos app
+    copyright_notice: Copyright ©️ 2025 Andrea Condorelli. All rights reserved. # (String) The product copyright of the macos app
+
+  web:
+    app_name: UniBoil # (String) The title of the web app and PWA
+    short_app_name: # (String) The short display name of the PWA (Optional, defaults to app_name if not set)
+    description: Universal Boilerplate for Flutter projects # (String) The description of the web app and PWA
+
+  windows:
+    app_name: UniBoil # (String) The window title & software name of the windows app
+    organization: ilCONDORA # (String) The organization name (company name) of the windows app
+    copyright_notice: Copyright ©️ 2025 Andrea Condorelli. All rights reserved. # (String) The legal copyright of the windows app
+    exe_name: uniboil-win # (String) The executable name (binary name) of the windows app
+
+# Run 'dart run icons_launcher:create' in the terminal to generate the icons
+icons_launcher:

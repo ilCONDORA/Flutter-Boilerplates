@@ -1,0 +1,43 @@
+{
+  "@@locale": "it",
+  "language": "Italiano",
+  "@language": {
+    "description": "Testo che verrà usato sotto la bandiera nelle impostazioni lingua"
+  },
+  "flag_not_found": "Bandiera non trovata",
+  "@flag_not_found": {
+    "description": "testo che sarà visualizzato nel caso in cui la bandiera non sia stata trovata"
+  },
+  "tooltip_language_settings": "Impostazioni lingua",
+  "@tooltip_language_settings": {
+    "description": "testo nel tooltip di PieAction per le impostazioni della lingua"
+  },
+  "title_language_settings": "Impostazioni lingua, seleziona la lingua desiderata",
+  "@title_language_settings": {
+    "description": "titolo nel dialog per le impostazioni della lingua"
+  },
+  "tooltip_currency_settings": "Impostazioni valuta",
+  "@tooltip_currency_settings": {
+    "description": "testo nel tooltip di PieAction per le impostazioni della valuta"
+  },
+  "title_currency_settings": "Impostazioni valuta, seleziona la valuta desiderata",
+  "@title_currency_settings": {
+    "description": "titolo nel dialog per le impostazioni della valuta"
+  },
+  "tooltip_change_theme": "Cambia il tema",
+  "@tooltip_change_theme": {
+    "description": "testo nel tooltip di PieAction per il cambio del tema"
+  },
+  "exit": "Esci",
+  "@exit": {
+    "description": "Label per il pulsante di uscita"
+  },
+  "home_label": "Home",
+  "@home_label": {
+    "description": "Etichetta del pulsante di navigazione per la schermata home"
+  },
+  "info_label": "Info",
+  "@info_label": {
+    "description": "Etichetta del pulsante di navigazione per la schermata info"
+  }
+}
