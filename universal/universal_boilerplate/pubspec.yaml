@@ -20,6 +20,7 @@ dependencies:
   pie_menu: ^3.2.7 # circular menu for settings
   currency_formatter: ^2.2.2 # get currency based on country code
   flag: ^7.0.0 # get flag based on country code
+  window_manager: ^0.4.3 # window manager for desktop, handles minimum size, position, etc.
 
 dev_dependencies:
   flutter_test:
