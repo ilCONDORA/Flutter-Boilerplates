@@ -323,7 +323,8 @@ class LayoutMaster extends StatelessWidget {
       titleSpacing: 0, // This remove the horizontal padding of the title.
       title: LayoutBuilder(
         builder: (context, constraints) {
-          //!! TODO: make this automatic, build the Row widget, calculate the width and then use it as maxWidth.
+          // TODO: make this automatic, build the Row widget, calculate the width and then use it as maxWidth.
+          // TODO: prima di tutto togliere le cose che potrebbero dar problemi, come lo spacer e l'expanded dentro NavigationWeb.
           final bool isLandscape = constraints.maxWidth > 1200;
           return Row(
             children: [
