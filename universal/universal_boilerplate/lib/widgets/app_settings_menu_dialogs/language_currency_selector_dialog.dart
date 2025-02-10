@@ -7,9 +7,19 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../blocs/app_settings/app_settings_bloc.dart';
 import '../../l10n/l10n.dart';
 
+/// [DialogType] enum is used to distinguish between different types of dialogs,
+/// for now it's only used to distinguish between language and currency selection dialogs.
 enum DialogType { language, currency }
-//TODO: aggiungere la documentazione
 
+/// [LanguageCurrencySelectorDialog] as the name suggests is a dialog that allows the user to select a language or a currency.
+/// This dialog is opened by clicking on the language or currency settings button inside [PieMenuAppSettings].
+///
+/// The [AlertDialog] is inside a [BlocBuilder] to listen to changes in the [AppSettingsBloc] and update the UI accordingly.
+///
+/// The first thing it does is to get the list of supported locales from the [L10n] class based on the [DialogType].
+/// Then it builds a [Wrap] widget with the list of locales, each locale is represented by a [Container] with a [Flag] and the name of the language or currency.
+/// Each item is built by the [_buildLocaleItem] method.
+///
 class LanguageCurrencySelectorDialog extends StatelessWidget {
   const LanguageCurrencySelectorDialog({super.key, required this.dialogType});
   final DialogType dialogType;
@@ -50,14 +60,20 @@ class LanguageCurrencySelectorDialog extends StatelessWidget {
     );
   }
 
-  // Costruisce un singolo elemento della griglia
+  /// [_buildLocaleItem] is a method that builds a [Container] with a [Flag] and the name of the language or currency.
+  /// The [Container] is wrapped in a [GestureDetector] to make it clickable and also a [MouseRegion] to change the cursor.
+  ///
+  /// The [isSelected] variable is used to set the border color of the [Container] based on the current selected locale.
+  /// The const [flagSize] is used to set the size of the flag, it's mainly the height and it's also used to calculate the width.
+  ///
+  /// In the case of an unsupported locale, the [Flag] widget will display a text with the message "Flag not found".
+  ///
   Widget _buildLocaleItem(
       BuildContext context, AppSettingsState state, Locale locale) {
     final isSelected = dialogType == DialogType.language
         ? state.appSettingsModel.localeLanguage == locale
         : state.appSettingsModel.localeCurrency == locale;
 
-    // flagSize è principalmente l'height e lo metto anche per la width ma questa ha anche il ratio
     const double flagSize = 80;
 
     return MouseRegion(
@@ -111,17 +127,25 @@ class LanguageCurrencySelectorDialog extends StatelessWidget {
     );
   }
 
-  Widget _buildTitle({required BuildContext context, required AppSettingsState state}) {
+  /// [_buildTitle] is a method that builds the title of the [AlertDialog] based on the [DialogType].
+  /// This method can be omitted and the title can be built directly in the [AlertDialog] widget,
+  /// but I prefer to keep it in case I need to debug it, as shown in the commented code.
+  ///
+  Widget _buildTitle(
+      {required BuildContext context, required AppSettingsState state}) {
     if (dialogType == DialogType.language) {
       //return Text('Select Language - ${state.appSettingsModel.localeLanguage}');
-      return  Text(AppLocalizations.of(context)!.title_language_settings);
+      return Text(AppLocalizations.of(context)!.title_language_settings);
+    } else if (dialogType == DialogType.currency) {
+      /* final currencyFormat = CurrencyFormat.fromLocale(
+        state.appSettingsModel.localeCurrency.toString(),
+      )!;
+      return Text(
+        'Select Currency - ${currencyFormat.symbol} - ${state.appSettingsModel.localeCurrency}',
+      ); */
+      return Text(AppLocalizations.of(context)!.title_currency_settings);
+    } else {
+      return Text('Error in the dialog type');
     }
-    return  Text(AppLocalizations.of(context)!.title_currency_settings);
-    /* final currencyFormat = CurrencyFormat.fromLocale(
-      state.appSettingsModel.localeCurrency.toString(),
-    )!;
-    return Text(
-      'Select Currency - ${currencyFormat.symbol} - ${state.appSettingsModel.localeCurrency}',
-    ); */
   }
 }

@@ -323,7 +323,7 @@ class LayoutMaster extends StatelessWidget {
       titleSpacing: 0, // This remove the horizontal padding of the title.
       title: LayoutBuilder(
         builder: (context, constraints) {
-          //!! TODO: make this automatic, build the Row widget, calculate the width and then use it as maxWidth.
+          // TODO: make this automatic, I didn't succed. I tried to do it in 2 different ways, using the overflow of SingleChildScrollView, using MultiChildLayoutDelegate.
           final bool isLandscape = constraints.maxWidth > 1200;
           return Row(
             children: [
