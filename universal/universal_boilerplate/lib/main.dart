@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:universal_boilerplate/navigation_genie.dart';
 import 'package:window_manager/window_manager.dart';
 
 import 'blocs/app_settings/app_settings_bloc.dart';
@@ -176,7 +177,7 @@ class _MainAppState extends State<MainApp> with WindowListener {
 
           return MaterialApp.router(
             title: 'UniBoil',
-            routerConfig: routerConfiguration,
+            routerConfig: branchesGenerator(),
             debugShowCheckedModeBanner: false,
             locale: state.appSettingsModel.localeLanguage,
             localizationsDelegates: AppLocalizations.localizationsDelegates,
