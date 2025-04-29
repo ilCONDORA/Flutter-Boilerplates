@@ -7,8 +7,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:universal_boilerplate/navigation_genie.dart';
+import 'package:universal_boilerplate/routes/router.dart';
 import 'package:window_manager/window_manager.dart';
+import 'package:dynamic_path_url_strategy/dynamic_path_url_strategy.dart';
 
 import 'blocs/app_settings/app_settings_bloc.dart';
 import 'layout_master.dart';
@@ -59,6 +60,9 @@ Future<void> main() async {
       });
     }
   }
+
+  // By calling this method we don't see the #/ in the URL.
+  setPathUrlStrategy();
 
   runApp(const MainApp());
 }
@@ -165,19 +169,17 @@ class _MainAppState extends State<MainApp> with WindowListener {
     super.dispose();
   }
 
+  final _newAppRouter = NewAppRouter();
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => AppSettingsBloc(),
       child: BlocBuilder<AppSettingsBloc, AppSettingsState>(
         builder: (context, state) {
-          // get the configuration for the routing of the app.
-          final RouterConfig<Object> routerConfiguration =
-              getRouterConfiguration();
-
           return MaterialApp.router(
             title: 'UniBoil',
-            routerConfig: branchesGenerator(),
+            routerConfig: _newAppRouter.config(),
             debugShowCheckedModeBanner: false,
             locale: state.appSettingsModel.localeLanguage,
             localizationsDelegates: AppLocalizations.localizationsDelegates,

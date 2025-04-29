@@ -39,5 +39,9 @@
   "info_label": "Info",
   "@info_label": {
     "description": "Etichetta del pulsante di navigazione per la schermata info"
+  },
+  "devices_label": "Dispositivi",
+  "@devices_label": {
+    "description": "Etichetta del pulsante di navigazione per la schermata dispositivi"
   }
 }
