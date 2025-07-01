@@ -1,0 +1,12 @@
+{
+  "@@comment": "Italian - IT",
+  "@@locale": "it",
+  "app_name": "Applicazione Esempio Internazionalizzazione",
+  "@app_name": {
+    "description": "Titolo dell'Applicazione Esempio Internazionalizzazione"
+  },
+  "example_text": "Questo testo è un esempio, il cestino è specifico per l'Italia",
+  "@example_text": {
+    "description": "Questo testo mostrerà come funziona il cambio di lingua"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "@@comment": "English - US",
+  "@@locale": "en",
+  "app_name": "Application Example Internationalization",
+  "@app_name": {
+    "description": "Title of the Application Example Internationalization"
+  },
+  "example_text": "This text is an example, trash can is US specific",
+  "@example_text": {
+    "description": "This text will show how the language change works"
+  }
+}
