@@ -217,37 +217,18 @@ class InfoRoute extends _i12.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i9.LayoutNavigationWrapper]
-class LayoutNavigationWrapper
-    extends _i12.PageRouteInfo<LayoutNavigationWrapperArgs> {
-  LayoutNavigationWrapper({_i13.Key? key, List<_i12.PageRouteInfo>? children})
-    : super(
-        LayoutNavigationWrapper.name,
-        args: LayoutNavigationWrapperArgs(key: key),
-        initialChildren: children,
-      );
+class LayoutNavigationWrapper extends _i12.PageRouteInfo<void> {
+  const LayoutNavigationWrapper({List<_i12.PageRouteInfo>? children})
+    : super(LayoutNavigationWrapper.name, initialChildren: children);
 
   static const String name = 'LayoutNavigationWrapper';
 
   static _i12.PageInfo page = _i12.PageInfo(
     name,
     builder: (data) {
-      final args = data.argsAs<LayoutNavigationWrapperArgs>(
-        orElse: () => const LayoutNavigationWrapperArgs(),
-      );
-      return _i9.LayoutNavigationWrapper(key: args.key);
+      return const _i9.LayoutNavigationWrapper();
     },
   );
-}
-
-class LayoutNavigationWrapperArgs {
-  const LayoutNavigationWrapperArgs({this.key});
-
-  final _i13.Key? key;
-
-  @override
-  String toString() {
-    return 'LayoutNavigationWrapperArgs{key: $key}';
-  }
 }
 
 /// generated route for

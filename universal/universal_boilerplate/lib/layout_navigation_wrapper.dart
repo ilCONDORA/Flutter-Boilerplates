@@ -33,136 +33,181 @@ class LayoutNavigationWrapper extends StatelessWidget {
         final scrollController = ScrollController();
 
         return Scaffold(
-          bottomNavigationBar: kIsWeb
-              ? null
-              : Offstage(
-                  offstage: !showBottomNav,
-                  child: GNav(
-                    rippleColor: Colors.grey[300]!,
-                    hoverColor: Colors.grey[100]!,
-                    gap: 8,
-                    activeColor: Colors.black,
-                    iconSize: 24,
-                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-                    duration: Duration(milliseconds: 400),
-                    tabBackgroundColor: Colors.grey[100]!,
-                    color: Colors.black,
-                    tabs: listOfNavigationRoutesAndChildren
-                        .map((individualRoute) {
-                      final navProps = individualRoute.navigationProperties;
+            bottomNavigationBar: kIsWeb
+                ? null
+                : Offstage(
+                    offstage: !showBottomNav,
+                    child: GNav(
+                      rippleColor: Colors.grey[300]!,
+                      hoverColor: Colors.grey[100]!,
+                      gap: 8,
+                      activeColor: Colors.black,
+                      iconSize: 24,
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                      duration: Duration(milliseconds: 400),
+                      tabBackgroundColor: Colors.grey[100]!,
+                      color: Colors.black,
+                      tabs: listOfNavigationRoutesAndChildren
+                          .map((individualRoute) {
+                        final navProps = individualRoute.navigationProperties;
 
-                      return GButton(
-                        icon: navProps!.icon,
-                        text: navProps.label(context),
-                        leading: navProps.otherThingInsteadOfIcon,
-                      );
-                    }).toList(),
-                    selectedIndex: tabsRouter.activeIndex,
-                    onTabChange: (index) {
-                      if (index == tabsRouter.activeIndex) {
-                        final rootRoute =
-                            listOfNavigationRoutesAndChildren[index].route;
-                        context.router.navigate(rootRoute);
-                      } else {
-                        tabsRouter.setActiveIndex(index);
-                      }
-                    },
+                        return GButton(
+                          icon: navProps!.icon,
+                          text: navProps.label(context),
+                          leading: navProps.otherThingInsteadOfIcon,
+                        );
+                      }).toList(),
+                      selectedIndex: tabsRouter.activeIndex,
+                      onTabChange: (index) {
+                        if (index == tabsRouter.activeIndex) {
+                          final rootRoute =
+                              listOfNavigationRoutesAndChildren[index].route;
+                          context.router.navigate(rootRoute);
+                        } else {
+                          tabsRouter.setActiveIndex(index);
+                        }
+                      },
+                    ),
                   ),
-                ),
-          appBar: !kIsWeb
-              ? null
-              : PreferredSize(
-                  preferredSize: Size.fromHeight(webAppBarHeight),
-                  child: Container(
-                    padding: EdgeInsets.all(4),
-                    height: webAppBarHeight,
-                    width: double.infinity,
-                    color: Colors.amber,
-                    child: webSmallBreakpoint < currentWidth
-                        ? Row(
-                            spacing: 10,
-                            children: [
-                              SizedBox(
-                                width: 200,
-                                height: double.infinity,
-                                child: Placeholder(),
-                              ),
-                              Expanded(
-                                child: Row(
-                                  spacing: 10,
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: listOfNavigationRoutesAndChildren
-                                      .map((individualRoute) {
-                                    final navProps =
-                                        individualRoute.navigationProperties;
-                                    final isSelected = tabsRouter.activeIndex ==
-                                        listOfNavigationRoutesAndChildren
-                                            .indexOf(individualRoute);
-
-                                    return TextButton(
-                                      onPressed: () {
-                                        if (isSelected) {
-                                          final rootRoute =
-                                              individualRoute.route;
-                                          context.router.navigate(rootRoute);
-                                        } else {
-                                          tabsRouter.setActiveIndex(
-                                              listOfNavigationRoutesAndChildren
-                                                  .indexOf(individualRoute));
-                                        }
-                                      },
-                                      style: TextButton.styleFrom(
-                                        foregroundColor: isSelected
-                                            ? Colors.black
-                                            : Colors.grey,
-                                        textStyle: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w500,
-                                        ),
-                                      ),
-                                      child: Text(
-                                        navProps!.label(context),
-                                      ),
-                                    );
-                                  }).toList(),
+            appBar: !kIsWeb
+                ? null
+                : PreferredSize(
+                    preferredSize: Size.fromHeight(webAppBarHeight),
+                    child: Container(
+                      padding: EdgeInsets.all(4),
+                      height: webAppBarHeight,
+                      width: double.infinity,
+                      color: Colors.amber,
+                      child: webSmallBreakpoint < currentWidth
+                          ? Row(
+                              spacing: 10,
+                              children: [
+                                SizedBox(
+                                  width: 200,
+                                  height: double.infinity,
+                                  child: Placeholder(),
                                 ),
-                              ),
-                              IconButton(
-                                icon: Icon(Icons.account_circle_rounded),
-                                onPressed: () {},
-                              ),
-                            ],
-                          )
-                        : Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              IconButton(
-                                icon: Icon(showSideNavByButton
-                                    ? Icons.close_rounded
-                                    : Icons.menu_rounded),
-                                onPressed: () {
-                                  if (showSideNavByButton) {
-                                    showSideNavByButton = false;
-                                  } else {
-                                    showSideNavByButton = true;
-                                  }
-                                },
-                              ),
-                              SizedBox(
-                                width: 200,
-                                height: double.infinity,
-                                child: Placeholder(),
-                              ),
-                              //SizedBox.shrink(),
-                              IconButton(
-                                icon: Icon(Icons.account_circle_rounded),
-                                onPressed: () {},
-                              ),
-                            ],
-                          ),
+                                Expanded(
+                                  child: Row(
+                                    spacing: 10,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: listOfNavigationRoutesAndChildren
+                                        .map((individualRoute) {
+                                      final navProps =
+                                          individualRoute.navigationProperties;
+                                      final isSelected =
+                                          tabsRouter.activeIndex ==
+                                              listOfNavigationRoutesAndChildren
+                                                  .indexOf(individualRoute);
+
+                                      return TextButton(
+                                        onPressed: () {
+                                          if (isSelected) {
+                                            final rootRoute =
+                                                individualRoute.route;
+                                            context.router.navigate(rootRoute);
+                                          } else {
+                                            tabsRouter.setActiveIndex(
+                                                listOfNavigationRoutesAndChildren
+                                                    .indexOf(individualRoute));
+                                          }
+                                        },
+                                        style: TextButton.styleFrom(
+                                          foregroundColor: isSelected
+                                              ? Colors.black
+                                              : Colors.grey,
+                                          textStyle: TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                        ),
+                                        child: Text(
+                                          navProps!.label(context),
+                                        ),
+                                      );
+                                    }).toList(),
+                                  ),
+                                ),
+                                IconButton(
+                                  icon: Icon(Icons.account_circle_rounded),
+                                  onPressed: () {},
+                                ),
+                              ],
+                            )
+                          : Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                IconButton(
+                                  icon: Icon(showSideNavByButton
+                                      ? Icons.close_rounded
+                                      : Icons.menu_rounded),
+                                  onPressed: () {
+                                    if (showSideNavByButton) {
+                                      showSideNavByButton = false;
+                                    } else {
+                                      showSideNavByButton = true;
+                                    }
+                                  },
+                                ),
+                                SizedBox(
+                                  width: 200,
+                                  height: double.infinity,
+                                  child: Placeholder(),
+                                ),
+                                //SizedBox.shrink(),
+                                IconButton(
+                                  icon: Icon(Icons.account_circle_rounded),
+                                  onPressed: () {},
+                                ),
+                              ],
+                            ),
+                    ),
+                  ),
+            body: 
+            Row(
+            children: [
+              Offstage(
+                offstage: false,
+                child: Row(
+                  children: [
+                    Container(
+                      height: double.infinity,
+                      color: Colors.amber,
+                      child: Text('Side Navigation'),
+                    ),
+                    VerticalDivider(
+                      width: 1,
+                      thickness: 1,
+                    ),
+                  ],
+                ),
+              ),
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text('Home Page'),
+                          for (var i = 0; i < 10; i++)
+                            Container(
+                              height: 300,
+                              width: 300,
+                              color: Colors.blue,
+                              child: Text('$i'),
+                            ),
+                        ],
+                      ),
+                      Placeholder(),
+                    ],
                   ),
                 ),
-          body: LayoutBuilder(
+              ),
+            ],
+          ),
+            /* LayoutBuilder(
             builder: (context, constraints) => Stack(
               fit: StackFit.expand,
               children: [
@@ -218,8 +263,8 @@ class LayoutNavigationWrapper extends StatelessWidget {
                 ),
               ],
             ),
-          ),
-        );
+          ), */
+            );
       },
     );
   }

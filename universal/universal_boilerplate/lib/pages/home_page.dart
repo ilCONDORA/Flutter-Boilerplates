@@ -7,8 +7,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
+    return Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           Text('Home Page'),
@@ -21,7 +20,6 @@ class HomePage extends StatelessWidget {
             ),
          
         ],
-      ),
-    );
+      );
   }
 }
