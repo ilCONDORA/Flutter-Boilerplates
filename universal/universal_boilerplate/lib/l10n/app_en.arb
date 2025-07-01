@@ -39,5 +39,9 @@
   "info_label": "Info",
   "@info_label": {
     "description": "Label for the button for navigating to the info screen"
+  },
+  "devices_label": "Devices",
+  "@devices_label": {
+    "description": "Label for the button for navigating to the devices screen"
   }
 }
