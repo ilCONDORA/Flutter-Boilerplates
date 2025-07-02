@@ -39,20 +39,30 @@ final _routes = <RouteBase>[
     branches: [
       StatefulShellBranch(
         routes: [
-          GoRoute(path: '/home', builder: (context, state) => HomeScreen()),
+          GoRoute(
+            path: '/home',
+            pageBuilder:
+                (context, state) =>
+                    NoTransitionPage(child: HomeScreen(), key: state.pageKey),
+          ),
         ],
       ),
       StatefulShellBranch(
         routes: [
           GoRoute(
             path: '/active',
-            builder: (context, state) => ActiveScreen(),
+            pageBuilder:
+                (context, state) =>
+                    NoTransitionPage(child: ActiveScreen(), key: state.pageKey),
             routes: [
               GoRoute(
                 path: ':activeId',
-                builder: (context, state) {
+                pageBuilder: (context, state) {
                   final activeId = state.pathParameters['activeId']!;
-                  return SingleActiveScreen(id: activeId);
+                  return NoTransitionPage(
+                    child: SingleActiveScreen(id: activeId),
+                    key: state.pageKey,
+                  );
                 },
               ),
             ],
@@ -63,7 +73,11 @@ final _routes = <RouteBase>[
         routes: [
           GoRoute(
             path: '/archived',
-            builder: (context, state) => ArchivedScreen(),
+            pageBuilder:
+                (context, state) => NoTransitionPage(
+                  child: ArchivedScreen(),
+                  key: state.pageKey,
+                ),
           ),
         ],
       ),

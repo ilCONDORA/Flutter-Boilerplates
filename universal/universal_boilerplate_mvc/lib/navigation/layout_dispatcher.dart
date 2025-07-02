@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
+import '../components/navigation_buttons.dart';
+
 /// Class used just to create the navigation items
 ///
 class NavigationItemModel {
@@ -19,7 +21,7 @@ class NavigationItemModel {
 /// - Rendering the pages
 /// I also have to mantion that we use [navigationShell] and [GoRouter] to
 /// navigate between the pages.
-/// 
+///
 class LayoutDispatcher extends StatelessWidget {
   const LayoutDispatcher({
     super.key,
@@ -31,12 +33,6 @@ class LayoutDispatcher extends StatelessWidget {
   final Widget child;
 
   static const webAppBarHeight = 60.0;
-
-  static final List<NavigationItemModel> navigationItems = [
-    NavigationItemModel(icon: Icons.home, text: 'Home'),
-    NavigationItemModel(icon: Icons.list, text: 'Active'),
-    NavigationItemModel(icon: Icons.archive, text: 'Archive'),
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -63,20 +59,7 @@ class LayoutDispatcher extends StatelessWidget {
                 ),
               ),
               Expanded(
-                child: GNav(
-                  tabBorderRadius: 16,
-                  padding: EdgeInsets.all(12),
-                  tabActiveBorder: Border.all(color: Colors.black),
-                  tabBorder: Border.all(color: Colors.grey),
-                  tabs:
-                      navigationItems
-                          .map(
-                            (item) => GButton(icon: item.icon, text: item.text),
-                          )
-                          .toList(),
-                  selectedIndex: navigationShell.currentIndex,
-                  onTabChange: navigationShell.goBranch,
-                ),
+                child: NavigationButtons(navigationShell: navigationShell),
               ),
             ],
           ),
@@ -84,18 +67,7 @@ class LayoutDispatcher extends StatelessWidget {
       ),
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: GNav(
-          tabBorderRadius: 16,
-          padding: EdgeInsets.all(12),
-          tabActiveBorder: Border.all(color: Colors.black),
-          tabBorder: Border.all(color: Colors.grey),
-          tabs:
-              navigationItems
-                  .map((item) => GButton(icon: item.icon, text: item.text))
-                  .toList(),
-          selectedIndex: navigationShell.currentIndex,
-          onTabChange: navigationShell.goBranch,
-        ),
+        child: NavigationButtons(navigationShell: navigationShell),
       ),
       body: SingleChildScrollView(
         child: Column(
