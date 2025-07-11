@@ -35,12 +35,6 @@ class LayoutDispatcher extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // This is one way to determine if the current route can be popped.
-    // It checks if the current URI has more than one '/'.
-    // It's used to conditionally show the back button in the app bar.
-    final bool canPop =
-        '/'.allMatches(GoRouterState.of(context).uri.toString()).length != 1;
-
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(webAppBarHeight),
@@ -49,13 +43,17 @@ class LayoutDispatcher extends StatelessWidget {
           padding: EdgeInsets.all(4),
           height: webAppBarHeight,
           child: Row(
+            spacing: 8,
             children: [
-              Visibility(
-                visible: canPop,
-                child: IconButton(
-                  icon: Icon(Icons.arrow_back),
-                  onPressed: () => GoRouter.of(context).pop(),
-                ),
+              ListenableBuilder(
+                listenable: GoRouter.of(context).routerDelegate,
+                builder:
+                    (context, child) => Visibility(
+                      visible: GoRouter.of(context).canPop(),
+                      child: BackButton(
+                        onPressed: () => GoRouter.of(context).pop(),
+                      ),
+                    ),
               ),
               Expanded(
                 child: NavigationButtons(navigationShell: navigationShell),
