@@ -29,8 +29,6 @@ class LayoutDispatcher extends StatelessWidget {
 
   final StatefulNavigationShell navigationShell;
 
-  static const webAppBarHeight = 60.0;
-
   @override
   Widget build(BuildContext context) {
     /// Update the state of PopRouteCubit.
@@ -44,11 +42,11 @@ class LayoutDispatcher extends StatelessWidget {
 
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(webAppBarHeight),
+        preferredSize: Size.fromHeight(60),
         child: Container(
           color: Colors.blue,
           padding: EdgeInsets.all(4),
-          height: webAppBarHeight,
+          height: double.infinity,
           child: Row(
             spacing: 8,
             children: [
@@ -77,42 +75,50 @@ class LayoutDispatcher extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         child: NavigationButtons(navigationShell: navigationShell),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            // By using this the height of the side navigation is determined by the biggest child.
-            // TODO: Try LayoutBuilder and ConstrainedBox.
-            IntrinsicHeight(
-              child: Row(
+      body: LayoutBuilder(
+        builder:
+            (context, constraints) => SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
                 children: [
-                  Container(
-                    width: 200,
-                    color: Colors.amber,
-                    child: Column(
-                      children: [
-                        AutomaticBackButton(),
-                        Text('Side Navigation'),
-                      ],
+                  ConstrainedBox(
+                    constraints: BoxConstraints(
+                      minHeight: constraints.maxHeight - 20,
+                    ),
+                    // By using this the height of the side navigation is determined by the biggest child.
+                    child: IntrinsicHeight(
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            width: 200,
+                            color: Colors.amber,
+                            child: Column(
+                              children: [
+                                AutomaticBackButton(),
+                                Text('Side Navigation'),
+                              ],
+                            ),
+                          ),
+                          VerticalDivider(width: 1, thickness: 1),
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: navigationShell,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                  VerticalDivider(width: 1, thickness: 1),
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: navigationShell,
-                    ),
+                  Container(
+                    height: 200,
+                    color: Colors.teal,
+                    child: Center(child: const Text("Footer")),
                   ),
                 ],
               ),
             ),
-            Container(
-              height: 200,
-              color: Colors.teal,
-              child: Center(child: const Text("Footer")),
-            ),
-          ],
-        ),
       ),
     );
   }
