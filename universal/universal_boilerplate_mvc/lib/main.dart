@@ -6,11 +6,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:universal_boilerplate_mvc/bloc/language/language_cubit.dart';
-import 'package:universal_boilerplate_mvc/bloc/theme/theme_cubit.dart';
 
+import 'bloc/language/language_cubit.dart';
+import 'bloc/pop_route/pop_route_cubit.dart';
+import 'bloc/theme/theme_cubit.dart';
 import 'l10n/l10n.dart';
-import 'navigation/app_router.dart';
+import 'navigation/router_configuration.dart';
 
 /// This method returns the correct path depending on the platform.
 /// It's powered by the path_provider package, here's all the paths it can return:
@@ -76,14 +77,17 @@ class MainApp extends StatelessWidget {
         BlocProvider<ThemeCubit>(create: (_) => ThemeCubit()),
         // We use the double dot to call the autoInitialize method and also create the instance of LanguageCubit. The single dot only calls the method.
         BlocProvider(create: (_) => LanguageCubit()..autoInitialize()),
+        // Use only if we want to use the AutomaticPopRouteButton widget.
+        BlocProvider<PopRouteCubit>(create: (_) => PopRouteCubit()),
       ],
       child: BlocBuilder<ThemeCubit, ThemeState>(
         builder: (context, themeState) {
           return BlocBuilder<LanguageCubit, LanguageState>(
             builder: (context, languageState) {
               return MaterialApp.router(
+                title: 'Universal Boilerplate App',
                 debugShowCheckedModeBanner: false,
-                routerConfig: AppRouter.router,
+                routerConfig: RouterConfiguration.config,
                 themeMode: themeState.themeMode,
                 theme: ThemeData.from(
                   colorScheme: ColorScheme.fromSeed(
