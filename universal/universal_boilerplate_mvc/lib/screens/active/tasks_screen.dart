@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../navigation/routes_declaration.dart';
+
 class TasksScreen extends StatelessWidget {
   const TasksScreen({super.key});
 
@@ -24,7 +26,7 @@ class TasksScreen extends StatelessWidget {
                 icon: Icon(Icons.arrow_forward),
                 onPressed:
                     () => GoRouter.of(context).goNamed(
-                      'taskDetails',
+                      RoutesNames.taskDetails.name,
                       pathParameters: {'id': i.toString()},
                     ),
               ),

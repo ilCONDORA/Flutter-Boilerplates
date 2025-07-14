@@ -5,12 +5,17 @@ import '../screens/active/tasks_screen.dart';
 import '../screens/active/task_details_screen.dart';
 import '../screens/home/home_screen.dart';
 
+/// This enum holds all the names of the routes that will be used in [RoutesDeclaration].
+/// By doing this we can easily access the routes name by their enum name value.
+///
+enum RoutesNames { home, tasks, taskDetails }
+
 /// This list holds the specification of all the routes that will be build inside a [StatefulShellBranch].
 /// This list will be used to create routes and buttons for the navigation.
 ///
 final List<RoutesDeclaration> routesDeclarationList = [
   RoutesDeclaration(
-    name: 'home',
+    name: RoutesNames.home.name,
     path: '/',
     navigationItemModel: NavigationItemModel(icon: Icons.home, text: 'Home'),
     pageBuilder:
@@ -18,7 +23,7 @@ final List<RoutesDeclaration> routesDeclarationList = [
             NoTransitionPage(child: HomeScreen(), key: state.pageKey),
   ),
   RoutesDeclaration(
-    name: "tasks",
+    name: RoutesNames.tasks.name,
     path: "/tasks",
     pageBuilder:
         (context, state) =>
@@ -26,8 +31,8 @@ final List<RoutesDeclaration> routesDeclarationList = [
     navigationItemModel: NavigationItemModel(icon: Icons.list, text: 'Tasks'),
     routes: [
       RoutesDeclaration(
-        name: 'taskDetails',
-        path: 'details/:id',
+        name: RoutesNames.taskDetails.name,
+        path: ':id/details',
         pageBuilder: (context, state) {
           final id = state.pathParameters['id']!;
           return NoTransitionPage(

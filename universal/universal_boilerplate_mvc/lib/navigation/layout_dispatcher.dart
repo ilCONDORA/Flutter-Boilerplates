@@ -6,15 +6,6 @@ import '../bloc/pop_route/pop_route_cubit.dart';
 import '../widgets/automatic_back_button_.dart';
 import '../widgets/navigation_buttons.dart';
 
-/// Class used just to create the navigation items
-///
-class NavigationItemModel {
-  final IconData icon;
-  final String text;
-
-  NavigationItemModel({required this.icon, required this.text});
-}
-
 /// [LayoutDispatcher] is the 'big guy', this widget is responsible for:
 /// - Dynamically rendering the arrow back button in the app bar
 /// - Rendering the bottom navigation bar
