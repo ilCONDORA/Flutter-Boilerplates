@@ -13,9 +13,10 @@ class HomeScreen extends StatelessWidget {
     return Column(
       spacing: 12,
       children: [
-        Row(
+        Wrap(
           spacing: 8,
-          mainAxisAlignment: MainAxisAlignment.center,
+          runSpacing: 8,
+          alignment: WrapAlignment.center,
           children: [
             // Test buttons to change the theme.
             ElevatedButton(

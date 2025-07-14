@@ -40,85 +40,87 @@ class LayoutDispatcher extends StatelessWidget {
       context.read<PopRouteCubit>().updateCanPop(GoRouter.of(context).canPop());
     });
 
-    return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(60),
-        child: Container(
-          color: Colors.blue,
-          padding: EdgeInsets.all(4),
-          height: double.infinity,
-          child: Row(
-            spacing: 8,
-            children: [
-              /// Here we don't use the [AutomaticBackButton] widget to show/hide the back button
-              /// because appBar rebuilds differently than the body of the app.
-              /// In the body we must use [AutomaticBackButton] while here it's not necessary.
-              ///
-              ListenableBuilder(
-                listenable: GoRouter.of(context).routerDelegate,
-                builder:
-                    (context, _) => Visibility(
-                      visible: GoRouter.of(context).canPop(),
-                      child: BackButton(
-                        onPressed: () => GoRouter.of(context).pop(),
+    return SafeArea(
+      child: Scaffold(
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(60),
+          child: Container(
+            color: Colors.blue,
+            padding: EdgeInsets.all(4),
+            height: double.infinity,
+            child: Row(
+              spacing: 8,
+              children: [
+                /// Here we don't use the [AutomaticBackButton] widget to show/hide the back button
+                /// because appBar rebuilds differently than the body of the app.
+                /// In the body we must use [AutomaticBackButton] while here it's not necessary.
+                ///
+                ListenableBuilder(
+                  listenable: GoRouter.of(context).routerDelegate,
+                  builder:
+                      (context, _) => Visibility(
+                        visible: GoRouter.of(context).canPop(),
+                        child: BackButton(
+                          onPressed: () => GoRouter.of(context).pop(),
+                        ),
                       ),
-                    ),
-              ),
-              Expanded(
-                child: NavigationButtons(navigationShell: navigationShell),
-              ),
-            ],
+                ),
+                Expanded(
+                  child: NavigationButtons(navigationShell: navigationShell),
+                ),
+              ],
+            ),
           ),
         ),
-      ),
-      bottomNavigationBar: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: NavigationButtons(navigationShell: navigationShell),
-      ),
-      body: LayoutBuilder(
-        builder:
-            (context, constraints) => SingleChildScrollView(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  ConstrainedBox(
-                    constraints: BoxConstraints(
-                      minHeight: constraints.maxHeight - 20,
-                    ),
-                    // By using this the height of the side navigation is determined by the biggest child.
-                    child: IntrinsicHeight(
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                            width: 200,
-                            color: Colors.amber,
-                            child: Column(
-                              children: [
-                                AutomaticBackButton(),
-                                Text('Side Navigation'),
-                              ],
+        bottomNavigationBar: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: NavigationButtons(navigationShell: navigationShell),
+        ),
+        body: LayoutBuilder(
+          builder:
+              (context, constraints) => SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    ConstrainedBox(
+                      constraints: BoxConstraints(
+                        minHeight: constraints.maxHeight - 20,
+                      ),
+                      // By using this the height of the side navigation is determined by the biggest child.
+                      child: IntrinsicHeight(
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              width: 200,
+                              color: Colors.amber,
+                              child: Column(
+                                children: [
+                                  AutomaticBackButton(),
+                                  Text('Side Navigation'),
+                                ],
+                              ),
                             ),
-                          ),
-                          VerticalDivider(width: 1, thickness: 1),
-                          Expanded(
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: navigationShell,
+                            VerticalDivider(width: 1, thickness: 1),
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: navigationShell,
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                  Container(
-                    height: 200,
-                    color: Colors.teal,
-                    child: Center(child: const Text("Footer")),
-                  ),
-                ],
+                    Container(
+                      height: 200,
+                      color: Colors.teal,
+                      child: Center(child: const Text("Footer")),
+                    ),
+                  ],
+                ),
               ),
-            ),
+        ),
       ),
     );
   }
