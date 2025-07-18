@@ -5,17 +5,21 @@ import '../screens/active/tasks_screen.dart';
 import '../screens/active/task_details_screen.dart';
 import '../screens/home/home_screen.dart';
 
-/// This enum holds all the names of the routes that will be used in [RoutesDeclaration].
-/// By doing this we can easily access the routes name by their enum name value.
+/// This class holds the names of all the routes that will be used in [GoRouter].
+/// This class is used to navigate between the routes using the [GoRouter.goNamed] method.
 ///
-enum RoutesNames { home, tasks, taskDetails }
+class DeclaredRoutesNames {
+  static const home = "Home";
+  static const tasks = "Tasks";
+  static const taskDetails = "Details of Task";
+}
 
 /// This list holds the specification of all the routes that will be build inside a [StatefulShellBranch].
 /// This list will be used to create routes and buttons for the navigation.
 ///
 final List<RoutesDeclaration> routesDeclarationList = [
   RoutesDeclaration(
-    name: RoutesNames.home.name,
+    name: DeclaredRoutesNames.home,
     path: '/',
     navigationItemModel: NavigationItemModel(icon: Icons.home, text: 'Home'),
     pageBuilder:
@@ -23,7 +27,7 @@ final List<RoutesDeclaration> routesDeclarationList = [
             NoTransitionPage(child: HomeScreen(), key: state.pageKey),
   ),
   RoutesDeclaration(
-    name: RoutesNames.tasks.name,
+    name: DeclaredRoutesNames.tasks,
     path: "/tasks",
     pageBuilder:
         (context, state) =>
@@ -31,7 +35,7 @@ final List<RoutesDeclaration> routesDeclarationList = [
     navigationItemModel: NavigationItemModel(icon: Icons.list, text: 'Tasks'),
     routes: [
       RoutesDeclaration(
-        name: RoutesNames.taskDetails.name,
+        name: DeclaredRoutesNames.taskDetails,
         path: ':id/details',
         pageBuilder: (context, state) {
           final id = state.pathParameters['id']!;

@@ -42,19 +42,9 @@ class LayoutDispatcher extends StatelessWidget {
             child: Row(
               spacing: 8,
               children: [
-                /// Here we don't use the [AutomaticBackButton] widget to show/hide the back button
-                /// because appBar rebuilds differently than the body of the app.
-                /// In the body we must use [AutomaticBackButton] while here it's not necessary.
-                ///
-                ListenableBuilder(
-                  listenable: GoRouter.of(context).routerDelegate,
-                  builder:
-                      (context, _) => Visibility(
-                        visible: GoRouter.of(context).canPop(),
-                        child: BackButton(
-                          onPressed: () => GoRouter.of(context).pop(),
-                        ),
-                      ),
+                AutomaticBackButton(),
+                Text(
+                  'Name of Route: ${GoRouter.of(context).state.name ?? 'Error'}',
                 ),
                 Expanded(
                   child: NavigationButtons(navigationShell: navigationShell),
@@ -86,10 +76,7 @@ class LayoutDispatcher extends StatelessWidget {
                               width: 200,
                               color: Colors.amber,
                               child: Column(
-                                children: [
-                                  AutomaticBackButton(),
-                                  Text('Side Navigation'),
-                                ],
+                                children: [Text('Side Navigation')],
                               ),
                             ),
                             VerticalDivider(width: 1, thickness: 1),
