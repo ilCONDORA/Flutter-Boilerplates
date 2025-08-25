@@ -21,9 +21,10 @@ class NavigationButtons extends StatelessWidget {
           routesDeclarationList.map((firstRouteDeclaration) {
             return GButton(
               icon:
-                  firstRouteDeclaration.navigationItemModel?.icon ??
+                  //firstRouteDeclaration.navigationItemModel?.icon ??
                   Icons.error,
-              text: firstRouteDeclaration.navigationItemModel?.text ?? "Error",
+              text: //firstRouteDeclaration.navigationItemModel?.text ??
+                  "Error",
             );
           }).toList(),
       selectedIndex: navigationShell.currentIndex,

@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../navigation/routes_declaration.dart';
+import '../../scrollable_page_widget.dart';
 
-class TasksScreen extends StatelessWidget {
-  const TasksScreen({super.key});
+class TasksPage extends ScrollablePageWidget {
+  const TasksPage({super.key});
+
 
   @override
-  Widget build(BuildContext context) {
+  Widget buildPageContent(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       spacing: 12,
@@ -26,7 +28,7 @@ class TasksScreen extends StatelessWidget {
                 icon: Icon(Icons.arrow_forward),
                 onPressed:
                     () => GoRouter.of(context).goNamed(
-                      DeclaredRoutesNames.taskDetails,
+                      DefinedRoutesNames.taskDetails,
                       pathParameters: {'id': i.toString()},
                     ),
               ),

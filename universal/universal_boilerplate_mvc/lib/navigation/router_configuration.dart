@@ -20,7 +20,13 @@ class RouterConfiguration {
   static final GoRouter config = GoRouter(
     initialLocation: '/',
     navigatorKey: rootNavigatorKey,
-    routes: _routes,
+    routes: [
+      ShellRoute(
+        routes: _convertToGoRoutes(routesDeclarationList),
+        builder: (context, state, child) =>
+            LayoutDispatcher(screenWidget: child),
+      ),
+    ],
   );
 }
 
@@ -39,48 +45,3 @@ List<GoRoute> _convertToGoRoutes(List<RoutesDeclaration> routesDeclaration) {
     );
   }).toList();
 }
-
-/// Convert a list of [RoutesDeclaration] into a list of [StatefulShellBranch].
-/// This is used to create branches for the [StatefulShellRoute].
-/// Each branch corresponds to a main route and its children routes.
-///
-/// Also we can see that we use the [_convertToGoRoutes] method to convert the routes of each branch.
-/// This allows us to keep the routes declaration clean and organized.
-///
-List<StatefulShellBranch> _convertToStatefulShellBranches({
-  required List<RoutesDeclaration> propRoutesDeclarationList,
-}) {
-  return propRoutesDeclarationList.map((route) {
-    return StatefulShellBranch(
-      routes: [
-        GoRoute(
-          name: route.name,
-          path: route.path,
-          pageBuilder: route.pageBuilder,
-          routes:
-              route.routes.isNotEmpty ? _convertToGoRoutes(route.routes) : [],
-        ),
-      ],
-    );
-  }).toList();
-}
-
-/// The [_routes] variable holds the list of all the routes in the application.
-/// Instead of having a list of [RouteBase] we use the [StatefulShellRoute.indexedStack] to
-/// manage the navigation between different screens by passing the routes index to a widget
-/// responsible for displaying the correct screen based on the current index.
-/// All this is managed by the [LayoutDispatcher] widget and [navigationShell] provided by [StatefulShellRoute].
-///
-/// We can also see that we use the [routesDeclarationList] variable and [_convertToStatefulShellBranches] method
-/// to create the branches of the [StatefulShellRoute].
-///
-final _routes = <RouteBase>[
-  StatefulShellRoute.indexedStack(
-    branches: _convertToStatefulShellBranches(
-      propRoutesDeclarationList: routesDeclarationList,
-    ),
-    builder:
-        (context, state, navigationShell) =>
-            LayoutDispatcher(navigationShell: navigationShell),
-  ),
-];

@@ -4,12 +4,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../bloc/language/language_cubit.dart';
 import '../../bloc/theme/theme_cubit.dart';
 import '../../l10n/app_localizations.dart';
+import '../../scrollable_page_widget.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+class HomePage extends ScrollablePageWidget {
+  const HomePage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget buildPageContent(BuildContext context) {
     return Column(
       spacing: 12,
       children: [
