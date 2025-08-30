@@ -7,6 +7,7 @@ import '../screens/active/tasks_page.dart';
 import '../screens/active/task_details_page.dart';
 import '../screens/home/home_page.dart';
 import '../navigation/router_configuration.dart';
+import 'clean_sequential_fade_transition_page.dart';
 
 /// This class holds the names of all the routes that will be assigned
 /// to the routes in all [GoRoute]s.
@@ -27,16 +28,20 @@ final List<RoutesDeclaration> routesDeclarationList = [
     path: '/',
     poppable: false,
     pageBuilder:
-        (context, state) =>
-            NoTransitionPage(child: const HomePage(), key: state.pageKey),
+        (context, state) => CleanSequentialFadeTransitionPage(
+          child: const HomePage(),
+          key: state.pageKey,
+        ),
   ),
   RoutesDeclaration(
     name: DefinedRoutesNames.tasks,
     path: "/tasks",
     poppable: false,
     pageBuilder:
-        (context, state) =>
-            NoTransitionPage(child: TasksPage(), key: state.pageKey),
+        (context, state) => CleanSequentialFadeTransitionPage(
+          child: TasksPage(),
+          key: state.pageKey,
+        ),
     routes: [
       RoutesDeclaration(
         name: DefinedRoutesNames.taskDetails,
@@ -46,7 +51,7 @@ final List<RoutesDeclaration> routesDeclarationList = [
           final String? id = state.pathParameters['id'];
           final int? idInt = int.tryParse(id ?? '');
 
-          return NoTransitionPage(
+          return CleanSequentialFadeTransitionPage(
             child: TaskDetailsPage(id: idInt),
             key: state.pageKey,
           );
