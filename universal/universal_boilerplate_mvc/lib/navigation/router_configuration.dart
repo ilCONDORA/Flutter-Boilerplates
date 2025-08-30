@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import 'layout_dispatcher.dart';
+import '../layout/layout_dispatcher.dart';
 import 'routes_declaration.dart';
 
 /// This variable holds the all the data related to the routes.
@@ -40,7 +40,7 @@ List<GoRoute> _convertToGoRoutes(List<RoutesDeclaration> routesDeclaration) {
     return GoRoute(
       name: route.name,
       path: route.path,
-      pageBuilder: route.pageBuilder,
+      pageBuilder: (context, state) => route.buildPage(context, state),
       routes: route.routes.isNotEmpty ? _convertToGoRoutes(route.routes) : [],
     );
   }).toList();
