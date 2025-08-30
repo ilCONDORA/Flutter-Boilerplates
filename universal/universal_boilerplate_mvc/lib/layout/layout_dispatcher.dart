@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:universal_boilerplate_mvc/bloc/pop_route/pop_route_cubit.dart';
-import 'package:universal_boilerplate_mvc/navigation/my_bottom_nav_bar.dart';
+
+import '../bloc/pop_route/pop_route_cubit.dart';
+import '../navigation/my_bottom_nav_bar.dart';
 
 /// [LayoutDispatcher] is responsible for showing all the pages that need an app bar.
 ///
