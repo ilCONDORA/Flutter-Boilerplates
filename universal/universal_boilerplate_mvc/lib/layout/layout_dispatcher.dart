@@ -39,6 +39,8 @@ class LayoutDispatcher extends StatelessWidget {
                   color: Colors.indigo,
                   child: SingleChildScrollView(
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
                       children: [
                         Text('Side Menu'),
                         Container(
@@ -54,11 +56,12 @@ class LayoutDispatcher extends StatelessWidget {
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
                   children: [
                     BlocBuilder<PopRouteCubit, bool>(
                       builder: (context, state) {
-                        return Visibility(
-                          visible: state,
+                        return Offstage(
+                          offstage: !state,
                           child: BackButton(
                             onPressed: () {
                               GoRouter.of(context).pop();

@@ -15,6 +15,7 @@ class HomePage extends StatelessWidget {
         SliverToBoxAdapter(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
             spacing: 12,
             children: [
               Wrap(
