@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:universal_boilerplate_mvc/bloc/cubit/window_manager_cubit.dart';
+import 'package:window_manager/window_manager.dart';
 
 import 'bloc/language/language_cubit.dart';
 import 'bloc/pop_route/pop_route_cubit.dart';
@@ -53,6 +55,7 @@ Future<Directory> getCorrectDirectory() async {
 }
 
 Future<void> main() async {
+  // TODO: Add country flag from the other boilerplates
   WidgetsFlutterBinding.ensureInitialized();
 
   HydratedBloc.storage = await HydratedStorage.build(
@@ -64,7 +67,96 @@ Future<void> main() async {
 
   setPathUrlStrategy();
 
-  runApp(MainApp());
+  //TODO: This is relatively old, gonna search for a better way.
+  // We use the if statement to cut off the window management system.
+  if (Platform.isWindows || Platform.isMacOS || Platform.isLinux) {
+    await windowManager.ensureInitialized();
+
+    final windowState = WindowManagerCubit().state;
+
+    // This variable has a lot of options, we are going to use the size, center and minimumSize.
+    WindowOptions windowOptions = WindowOptions(
+      size:
+          windowState
+              .windowSize, // At first launch it will be null and id doesn't give any errors but after that it will use the size saved in the state.
+      center:
+          windowState.windowPosition ==
+          null, // If the position is null, so after the first launch, it will center the window and after it will use the position saved in the state.
+      minimumSize: Size(700, 600),
+    );
+
+    // After setting the size, constraint and other things we call this method to set other options.
+    // Fun fact: here we have the 'windowManager.setSize' method but it doesn't work, that's why we set the size in the options.
+    windowManager.waitUntilReadyToShow(windowOptions, () async {
+      if (windowState.windowPosition != null) {
+        await windowManager.setPosition(windowState.windowPosition!);
+      }
+      if (windowState.isMaximized) {
+        await windowManager.maximize();
+      }
+      await windowManager.show();
+      await windowManager.focus();
+    });
+  }
+
+  runApp(WindowManagerWrapper());
+}
+
+class WindowManagerWrapper extends StatefulWidget {
+  const WindowManagerWrapper({super.key});
+
+  @override
+  State<WindowManagerWrapper> createState() => _WindowManagerWrapperState();
+}
+
+class _WindowManagerWrapperState extends State<WindowManagerWrapper>
+    with WindowListener {
+  final WindowManagerCubit windowCubit = WindowManagerCubit();
+
+  @override
+  void initState() {
+    super.initState();
+    windowManager.addListener(this);
+  }
+
+  @override
+  void onWindowMaximize() {
+    if (mounted) {
+      windowCubit.changeWindowMaximizedState(true);
+    }
+  }
+
+  @override
+  void onWindowUnmaximize() {
+    if (mounted) {
+      windowCubit.changeWindowMaximizedState(false);
+    }
+  }
+
+  @override
+  void onWindowResized() async {
+    if (mounted) {
+      windowCubit.changeWindowSize(await windowManager.getSize());
+    }
+  }
+
+  @override
+  void onWindowMoved() async {
+    if (mounted) {
+      windowCubit.changeWindowPosition(await windowManager.getPosition());
+    }
+  }
+
+  @override
+  void dispose() {
+    windowManager.removeListener(this);
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return const MainApp();
+  }
 }
 
 class MainApp extends StatelessWidget {
