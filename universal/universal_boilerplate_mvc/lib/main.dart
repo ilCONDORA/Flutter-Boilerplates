@@ -117,6 +117,7 @@ class _WindowManagerWrapperState extends State<WindowManagerWrapper>
   void initState() {
     super.initState();
     windowManager.addListener(this);
+    print(windowManager.getDevicePixelRatio());
   }
 
   @override
@@ -134,14 +135,14 @@ class _WindowManagerWrapperState extends State<WindowManagerWrapper>
   }
 
   @override
-  void onWindowResized() async {
+  void onWindowResize() async {
     if (mounted) {
       windowCubit.changeWindowSize(await windowManager.getSize());
     }
   }
 
   @override
-  void onWindowMoved() async {
+  void onWindowMove() async {
     if (mounted) {
       windowCubit.changeWindowPosition(await windowManager.getPosition());
     }
