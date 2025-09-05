@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:universal_boilerplate_mvc/bloc/cubit/window_manager_cubit.dart';
+import 'package:universal_boilerplate_mvc/bloc/window_manager/window_manager_cubit.dart';
 import 'package:window_manager/window_manager.dart';
 
 import 'bloc/language/language_cubit.dart';
@@ -69,7 +69,7 @@ Future<void> main() async {
 
   //TODO: This is relatively old, gonna search for a better way.
   // We use the if statement to cut off the window management system.
-  if (Platform.isWindows || Platform.isMacOS || Platform.isLinux) {
+  if (!kIsWeb && (Platform.isWindows || Platform.isMacOS || Platform.isLinux)) {
     await windowManager.ensureInitialized();
 
     final windowState = WindowManagerCubit().state;
