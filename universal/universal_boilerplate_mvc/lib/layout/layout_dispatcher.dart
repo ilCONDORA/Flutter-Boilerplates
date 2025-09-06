@@ -40,7 +40,7 @@ class LayoutDispatcher extends StatelessWidget {
                   child: SingleChildScrollView(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
+                      mainAxisSize: MainAxisSize.min,
                       children: [
                         Text('Side Menu'),
                         Container(
@@ -60,13 +60,19 @@ class LayoutDispatcher extends StatelessWidget {
                   children: [
                     BlocBuilder<PopRouteCubit, bool>(
                       builder: (context, state) {
-                        return Offstage(
-                          offstage: !state,
-                          child: BackButton(
-                            onPressed: () {
-                              GoRouter.of(context).pop();
-                            },
-                          ),
+                        return AnimatedSwitcher(
+                          switchInCurve:  const Interval(0.0, 0.8, curve: Curves.easeInCubic),
+                          switchOutCurve: const Interval(0.5, 1.0, curve: Curves.easeOutCubic),
+                          duration: Duration(milliseconds: 375),
+                          child:
+                              state
+                                  ? BackButton(
+                                    key: ValueKey('back_button'),
+                                    onPressed: () {
+                                      GoRouter.of(context).pop();
+                                    },
+                                  )
+                                  : SizedBox.shrink(key: ValueKey('empty')),
                         );
                       },
                     ),

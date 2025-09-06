@@ -84,7 +84,11 @@ class RoutesDeclaration {
   });
 
   Page<dynamic> buildPage(BuildContext context, GoRouterState state) {
-    context.read<PopRouteCubit>().updateCanPop(poppable);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (context.mounted) {
+        context.read<PopRouteCubit>().updateCanPop(poppable);
+      }
+    });
     return pageBuilder(context, state);
   }
 }
