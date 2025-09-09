@@ -4,7 +4,6 @@ import 'package:go_router/go_router.dart';
 import '../screens/active/tasks_page.dart';
 import '../screens/active/task_details_page.dart';
 import '../screens/home/home_page.dart';
-import '../navigation/router_configuration.dart';
 import 'clean_sequential_fade_transition_page.dart';
 
 /// This class holds the names of all the routes that will be assigned
@@ -56,13 +55,11 @@ final List<RoutesDeclaration> routesDeclarationList = [
   ),
 ];
 
-//TODO: Rewrite.
 /// [RoutesDeclaration] is used to define all the data related to a route.
 ///
-/// The [buildPage] method is used in the [RouterConfiguration] by [GoRoute]
-/// and basically instead of using the [pageBuilder] directly, it uses this method
-/// because it also updates the [PopRouteCubit] with the [poppable] value and then
-/// it calls the [pageBuilder] to build the page.
+/// [pageBuilder], as the name implies, is used to build the page and it's a
+/// method because it needs the [BuildContext] and [GoRouterState];
+/// We can use [GoRouterState] to get the pathParameters, queryParameters, etc.
 ///
 class RoutesDeclaration {
   final String name;
