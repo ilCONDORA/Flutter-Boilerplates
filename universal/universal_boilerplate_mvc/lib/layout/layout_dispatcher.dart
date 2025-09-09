@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 
-import '../bloc/pop_route/pop_route_cubit.dart';
 import '../navigation/my_bottom_nav_bar.dart';
 
 /// [LayoutDispatcher] is responsible for showing all the pages that need an app bar.
@@ -53,33 +50,7 @@ class LayoutDispatcher extends StatelessWidget {
                   ),
                 ),
               ),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    BlocBuilder<PopRouteCubit, bool>(
-                      builder: (context, state) {
-                        return AnimatedSwitcher(
-                          switchInCurve:  const Interval(0.0, 0.8, curve: Curves.easeInCubic),
-                          switchOutCurve: const Interval(0.5, 1.0, curve: Curves.easeOutCubic),
-                          duration: Duration(milliseconds: 375),
-                          child:
-                              state
-                                  ? BackButton(
-                                    key: ValueKey('back_button'),
-                                    onPressed: () {
-                                      GoRouter.of(context).pop();
-                                    },
-                                  )
-                                  : SizedBox.shrink(key: ValueKey('empty')),
-                        );
-                      },
-                    ),
-                    Expanded(child: screenWidget),
-                  ],
-                ),
-              ),
+              Expanded(child: screenWidget),
             ],
           ),
         ),

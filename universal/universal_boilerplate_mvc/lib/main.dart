@@ -5,7 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 
 import 'bloc/language/language_cubit.dart';
-import 'bloc/pop_route/pop_route_cubit.dart';
 import 'bloc/theme/theme_cubit.dart';
 import 'l10n/l10n.dart';
 import 'navigation/router_configuration.dart';
@@ -42,8 +41,6 @@ class MainApp extends StatelessWidget {
         BlocProvider<ThemeCubit>(create: (_) => ThemeCubit()),
         // We use the double dot to call the autoInitialize method and also create the instance of LanguageCubit. The single dot only calls the method.
         BlocProvider(create: (_) => LanguageCubit()..autoInitialize()),
-        // Use only if we want to use the AutomaticPopRouteButton widget.
-        BlocProvider<PopRouteCubit>(create: (_) => PopRouteCubit()),
       ],
       child: BlocBuilder<ThemeCubit, ThemeState>(
         builder: (context, themeState) {

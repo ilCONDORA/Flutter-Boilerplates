@@ -37,16 +37,20 @@ class TasksPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomScrollView(
       slivers: [
-        SliverToBoxAdapter(
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Text('Active Tasks Screen', style: TextStyle(fontSize: 24)),
-          ),
+        SliverAppBar(
+          pinned: false,
+          floating: true,
+          snap:
+              true, // Whitout this the app bar will remain half open if during a scroll we stop scrolling.
+          backgroundColor: Theme.of(context).colorScheme.surface,
+          foregroundColor: Theme.of(context).colorScheme.onSurface,
+          elevation: 1,
+          title: Text('Active Tasks Screen'),
         ),
         SliverList(
           delegate: SliverChildListDelegate(_buildList(_tasks, context)),
         ),
-      ] ,
+      ],
     );
   }
 }

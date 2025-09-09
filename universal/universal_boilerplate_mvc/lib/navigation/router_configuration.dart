@@ -23,8 +23,8 @@ class RouterConfiguration {
     routes: [
       ShellRoute(
         routes: _convertToGoRoutes(routesDeclarationList),
-        builder: (context, state, child) =>
-            LayoutDispatcher(screenWidget: child),
+        builder:
+            (context, state, child) => LayoutDispatcher(screenWidget: child),
       ),
     ],
   );
@@ -40,7 +40,7 @@ List<GoRoute> _convertToGoRoutes(List<RoutesDeclaration> routesDeclaration) {
     return GoRoute(
       name: route.name,
       path: route.path,
-      pageBuilder: (context, state) => route.buildPage(context, state),
+      pageBuilder: (context, state) => route.pageBuilder(context, state),
       routes: route.routes.isNotEmpty ? _convertToGoRoutes(route.routes) : [],
     );
   }).toList();

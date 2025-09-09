@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-import '../bloc/pop_route/pop_route_cubit.dart';
 import '../screens/active/tasks_page.dart';
 import '../screens/active/task_details_page.dart';
 import '../screens/home/home_page.dart';
@@ -26,7 +24,6 @@ final List<RoutesDeclaration> routesDeclarationList = [
   RoutesDeclaration(
     name: DefinedRoutesNames.home,
     path: '/',
-    poppable: false,
     pageBuilder:
         (context, state) => CleanSequentialFadeTransitionPage(
           child: const HomePage(),
@@ -36,7 +33,6 @@ final List<RoutesDeclaration> routesDeclarationList = [
   RoutesDeclaration(
     name: DefinedRoutesNames.tasks,
     path: "/tasks",
-    poppable: false,
     pageBuilder:
         (context, state) => CleanSequentialFadeTransitionPage(
           child: TasksPage(),
@@ -46,7 +42,6 @@ final List<RoutesDeclaration> routesDeclarationList = [
       RoutesDeclaration(
         name: DefinedRoutesNames.taskDetails,
         path: ':id/details',
-        poppable: true,
         pageBuilder: (context, state) {
           final String? id = state.pathParameters['id'];
           final int? idInt = int.tryParse(id ?? '');
@@ -61,6 +56,7 @@ final List<RoutesDeclaration> routesDeclarationList = [
   ),
 ];
 
+//TODO: Rewrite.
 /// [RoutesDeclaration] is used to define all the data related to a route.
 ///
 /// The [buildPage] method is used in the [RouterConfiguration] by [GoRoute]
@@ -72,23 +68,12 @@ class RoutesDeclaration {
   final String name;
   final String path;
   final Page<dynamic> Function(BuildContext, GoRouterState) pageBuilder;
-  final bool poppable;
   final List<RoutesDeclaration> routes;
 
   RoutesDeclaration({
     required this.name,
     required this.path,
     required this.pageBuilder,
-    required this.poppable,
     this.routes = const <RoutesDeclaration>[],
   });
-
-  Page<dynamic> buildPage(BuildContext context, GoRouterState state) {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (context.mounted) {
-        context.read<PopRouteCubit>().updateCanPop(poppable);
-      }
-    });
-    return pageBuilder(context, state);
-  }
 }
