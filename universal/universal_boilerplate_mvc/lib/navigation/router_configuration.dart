@@ -40,7 +40,7 @@ List<GoRoute> _convertToGoRoutes(List<RoutesDeclaration> routesDeclaration) {
     return GoRoute(
       name: route.name,
       path: route.path,
-      pageBuilder: (context, state) => route.pageBuilder(context, state),
+      builder: (context, state) => route.pageBuilder(context, state),
       routes: route.routes.isNotEmpty ? _convertToGoRoutes(route.routes) : [],
     );
   }).toList();

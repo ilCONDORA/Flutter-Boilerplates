@@ -7,6 +7,7 @@ import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'bloc/language/language_cubit.dart';
 import 'bloc/theme/theme_cubit.dart';
 import 'l10n/l10n.dart';
+import 'navigation/fade_page_transition_builder.dart';
 import 'navigation/router_configuration.dart';
 import 'utils/get_correct_directory.dart';
 import 'utils/window_manager_utils.dart';
@@ -51,16 +52,34 @@ class MainApp extends StatelessWidget {
                 debugShowCheckedModeBanner: false,
                 routerConfig: RouterConfiguration.config,
                 themeMode: themeState.themeMode,
-                theme: ThemeData.from(
+                theme: ThemeData(
                   colorScheme: ColorScheme.fromSeed(
                     seedColor: Colors.blue,
                     brightness: Brightness.light,
                   ),
+                  pageTransitionsTheme: PageTransitionsTheme(
+                    builders: Map<
+                      TargetPlatform,
+                      PageTransitionsBuilder
+                    >.fromIterable(
+                      TargetPlatform.values,
+                      value: (_) => const CustomFadePageTransitionsBuilder(),
+                    ),
+                  ),
                 ),
-                darkTheme: ThemeData.from(
+                darkTheme: ThemeData(
                   colorScheme: ColorScheme.fromSeed(
                     seedColor: Colors.blue,
                     brightness: Brightness.dark,
+                  ),
+                  pageTransitionsTheme: PageTransitionsTheme(
+                    builders: Map<
+                      TargetPlatform,
+                      PageTransitionsBuilder
+                    >.fromIterable(
+                      TargetPlatform.values,
+                      value: (_) => const CustomFadePageTransitionsBuilder(),
+                    ),
                   ),
                 ),
                 locale: languageState.activeLanguage,

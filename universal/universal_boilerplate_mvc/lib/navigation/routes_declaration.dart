@@ -4,7 +4,6 @@ import 'package:go_router/go_router.dart';
 import '../screens/active/tasks_page.dart';
 import '../screens/active/task_details_page.dart';
 import '../screens/home/home_page.dart';
-import 'clean_sequential_fade_transition_page.dart';
 
 /// This class holds the names of all the routes that will be assigned
 /// to the routes in all [GoRoute]s.
@@ -23,20 +22,13 @@ final List<RoutesDeclaration> routesDeclarationList = [
   RoutesDeclaration(
     name: DefinedRoutesNames.home,
     path: '/',
-    pageBuilder:
-        (context, state) => CleanSequentialFadeTransitionPage(
-          child: const HomePage(),
-          key: state.pageKey,
-        ),
+    pageBuilder: (context, state) => HomePage(key: state.pageKey),
   ),
   RoutesDeclaration(
     name: DefinedRoutesNames.tasks,
     path: "/tasks",
-    pageBuilder:
-        (context, state) => CleanSequentialFadeTransitionPage(
-          child: TasksPage(),
-          key: state.pageKey,
-        ),
+    pageBuilder: (context, state) => TasksPage(key: state.pageKey),
+
     routes: [
       RoutesDeclaration(
         name: DefinedRoutesNames.taskDetails,
@@ -45,10 +37,7 @@ final List<RoutesDeclaration> routesDeclarationList = [
           final String? id = state.pathParameters['id'];
           final int? idInt = int.tryParse(id ?? '');
 
-          return CleanSequentialFadeTransitionPage(
-            child: TaskDetailsPage(id: idInt),
-            key: state.pageKey,
-          );
+          return TaskDetailsPage(id: idInt, key: state.pageKey);
         },
       ),
     ],
@@ -64,7 +53,7 @@ final List<RoutesDeclaration> routesDeclarationList = [
 class RoutesDeclaration {
   final String name;
   final String path;
-  final Page<dynamic> Function(BuildContext, GoRouterState) pageBuilder;
+  final Widget Function(BuildContext, GoRouterState) pageBuilder;
   final List<RoutesDeclaration> routes;
 
   RoutesDeclaration({
