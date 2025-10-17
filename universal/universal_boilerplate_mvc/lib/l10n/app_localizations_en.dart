@@ -9,19 +9,46 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
-  String get app_name => 'Application Example Internationalization';
+  String get languageName => 'English';
 
   @override
-  String get example_text => 'This text is an example, trash can is US specific';
-}
-
-/// The translations for English, as used in the United Kingdom (`en_GB`).
-class AppLocalizationsEnGb extends AppLocalizationsEn {
-  AppLocalizationsEnGb(): super('en_GB');
+  String get example_text => 'Example text in English';
 
   @override
-  String get app_name => 'Application Example Internationalization';
+  String get tasks_page_title => 'My Tasks';
 
   @override
-  String get example_text => 'This text is an example, rubbish bin is GB specific';
+  String task_with_id(Object id) {
+    return 'Task $id';
+  }
+
+  @override
+  String task_description_with_id(Object id) {
+    return 'Description of task with id $id';
+  }
+
+  @override
+  String task_detail_page_with_id(Object id) {
+    return 'Task Detail Page with ID: $id';
+  }
+
+  @override
+  String task_detail_page_error_with_id(Object id) {
+    return 'Error loading task details with ID: $id';
+  }
+
+  @override
+  String get setting_theme => 'Change Theme';
+
+  @override
+  String get setting_theme_system => 'System';
+
+  @override
+  String get setting_language => 'Change Language';
+
+  @override
+  String get setting_language_dialog_input_hint => 'Search language...';
+
+  @override
+  String get setting_language_dialog_close_button => 'Close';
 }

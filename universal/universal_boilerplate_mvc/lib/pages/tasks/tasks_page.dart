@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import '../../l10n/app_localizations.dart';
+import '../../widgets/padding_wrapper.dart';
 
 import '../../navigation/routes_declaration.dart';
 
@@ -11,19 +13,21 @@ class TasksPage extends StatelessWidget {
   List<Widget> _buildList(List<String> data, BuildContext context) {
     return data
         .map(
-          (e) => Container(
+          (i) => Container(
             margin: EdgeInsets.symmetric(horizontal: 16, vertical: 4),
             height: 150,
             child: Card(
               child: ListTile(
-                title: Text('Task $e'),
-                subtitle: Text('Description of task with id $e'),
+                title: Text(AppLocalizations.of(context)!.task_with_id(i)),
+                subtitle: Text(
+                  AppLocalizations.of(context)!.task_description_with_id(i),
+                ),
                 trailing: IconButton(
                   icon: Icon(Icons.arrow_forward),
                   onPressed:
                       () => GoRouter.of(context).goNamed(
                         DefinedRoutesNames.taskDetails,
-                        pathParameters: {'id': e.toString()},
+                        pathParameters: {'id': i.toString()},
                       ),
                 ),
               ),
@@ -45,10 +49,12 @@ class TasksPage extends StatelessWidget {
           backgroundColor: Theme.of(context).colorScheme.surface,
           foregroundColor: Theme.of(context).colorScheme.onSurface,
           elevation: 1,
-          title: Text('Active Tasks Screen'),
+          title: Text(AppLocalizations.of(context)!.tasks_page_title),
         ),
-        SliverList(
-          delegate: SliverChildListDelegate(_buildList(_tasks, context)),
+        PaddingWrapper(
+          child: SliverList(
+            delegate: SliverChildListDelegate(_buildList(_tasks, context)),
+          ),
         ),
       ],
     );

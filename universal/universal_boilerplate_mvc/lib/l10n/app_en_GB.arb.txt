@@ -1,0 +1,8 @@
+{
+  "@@comment": "English - GB",
+  "@@locale": "en_GB",
+  "welcome_text": "Welcome to Kinesitheke!",
+  "@welcome_text": {
+    "description": "Welcome text shown on the main screen"
+  }
+}

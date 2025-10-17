@@ -7,13 +7,12 @@ import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'bloc/language/language_cubit.dart';
 import 'bloc/theme/theme_cubit.dart';
 import 'l10n/l10n.dart';
-import 'navigation/fade_page_transition_builder.dart';
 import 'navigation/router_configuration.dart';
+import 'utils/app_colors.dart';
 import 'utils/get_correct_directory.dart';
 import 'utils/window_manager_utils.dart';
 
 Future<void> main() async {
-  // TODO: Add country flag from the other boilerplates
   WidgetsFlutterBinding.ensureInitialized();
 
   HydratedBloc.storage = await HydratedStorage.build(
@@ -54,7 +53,7 @@ class MainApp extends StatelessWidget {
                 themeMode: themeState.themeMode,
                 theme: ThemeData(
                   colorScheme: ColorScheme.fromSeed(
-                    seedColor: Colors.blue,
+                    seedColor: AppColors.airForceBlue,
                     brightness: Brightness.light,
                   ),
                   pageTransitionsTheme: PageTransitionsTheme(
@@ -63,13 +62,13 @@ class MainApp extends StatelessWidget {
                       PageTransitionsBuilder
                     >.fromIterable(
                       TargetPlatform.values,
-                      value: (_) => const CustomFadePageTransitionsBuilder(),
+                      value: (_) => const FadeForwardsPageTransitionsBuilder(),
                     ),
                   ),
                 ),
                 darkTheme: ThemeData(
                   colorScheme: ColorScheme.fromSeed(
-                    seedColor: Colors.blue,
+                    seedColor: AppColors.airForceBlue,
                     brightness: Brightness.dark,
                   ),
                   pageTransitionsTheme: PageTransitionsTheme(
@@ -78,7 +77,7 @@ class MainApp extends StatelessWidget {
                       PageTransitionsBuilder
                     >.fromIterable(
                       TargetPlatform.values,
-                      value: (_) => const CustomFadePageTransitionsBuilder(),
+                      value: (_) => const FadeForwardsPageTransitionsBuilder(),
                     ),
                   ),
                 ),

@@ -1,0 +1,8 @@
+{
+  "@@comment": "Italian - IT",
+  "@@locale": "it",
+  "welcome_text": "Benvenuti su Kinesitheke!",
+  "@welcome_text": {
+    "description": "Testo di benvenuto mostrato nella schermata principale"
+  }
+}

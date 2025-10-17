@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 
@@ -15,22 +17,46 @@ class WindowManagerCubit extends HydratedCubit<WindowManagerState> {
   ///
   WindowManagerCubit() : super(WindowManagerInitial());
 
+  // Debounce timers to avoid emitting state too frequently (e.g., during drag and resize).
+  Timer? _sizeDebounce;
+  Timer? _positionDebounce;
+  final Duration _debounceDuration = const Duration(milliseconds: 250);
+
   /// Method called to change the state of the window size.
   ///
   void changeWindowSize(Size newSize) {
-    emit(state.copyWith(windowSize: newSize));
+    if (state.windowSize == newSize) return;
+    _sizeDebounce?.cancel();
+    _sizeDebounce = Timer(_debounceDuration, () {
+      if (state.windowSize != newSize) {
+        emit(state.copyWith(windowSize: newSize));
+      }
+    });
   }
 
   /// Method called to change the state of the window position.
   ///
   void changeWindowPosition(Offset newPosition) {
-    emit(state.copyWith(windowPosition: newPosition));
+    if (state.windowPosition == newPosition) return;
+    _positionDebounce?.cancel();
+    _positionDebounce = Timer(_debounceDuration, () {
+      if (state.windowPosition != newPosition) {
+        emit(state.copyWith(windowPosition: newPosition));
+      }
+    });
   }
 
   /// Method called to change the state of the window maximized state.
   ///
-  void changeWindowMaximizedState(bool newMaximizedState) {
-    emit(state.copyWith(isMaximized: newMaximizedState));
+  void changeWindowMaximizedState() {
+    emit(state.copyWith(isMaximized: !state.isMaximized));
+  }
+
+  @override
+  Future<void> close() {
+    _sizeDebounce?.cancel();
+    _positionDebounce?.cancel();
+    return super.close();
   }
 
   @override

@@ -1,12 +1,64 @@
 {
-  "@@comment": "Italian - IT",
+  "@@comment": "Italian",
   "@@locale": "it",
-  "app_name": "Applicazione Esempio Internazionalizzazione",
-  "@app_name": {
-    "description": "Titolo dell'Applicazione Esempio Internazionalizzazione"
+  "languageName": "Italiano",
+  "@languageName": {
+    "description": "Nome della lingua in italiano"
   },
-  "example_text": "Questo testo è un esempio, il cestino è specifico per l'Italia",
+  "example_text": "Testo di esempio in italiano",
   "@example_text": {
-    "description": "Questo testo mostrerà come funziona il cambio di lingua"
+    "description": "Un testo di esempio tradotto in italiano"
+  },
+  "tasks_page_title": "Le Mie Attività",
+  "@tasks_page_title": {
+    "description": "Titolo della pagina delle attività"
+  },
+  "task_with_id": "Attività {id}",
+  "@task_with_id": {
+    "description": "Titolo dell'attività con ID",
+    "placeholders": {
+      "id": {}
+    }
+  },
+  "task_description_with_id": "Descrizione dell'attività con id {id}",
+  "@task_description_with_id": {
+    "description": "Descrizione dell'attività con ID",
+    "placeholders": {
+      "id": {}
+    }
+  },
+  "task_detail_page_with_id": "Pagina Dettagli Attività con ID: {id}",
+  "@task_detail_page_with_id": {
+    "description": "Descrizione della pagina dei dettagli dell'attività con ID",
+    "placeholders": {
+      "id": {}
+    }
+  },
+  "task_detail_page_error_with_id": "Errore nel caricare i dettagli dell'attività con ID: {id}",
+  "@task_detail_page_error_with_id": {
+    "description": "Messaggio di errore per il caricamento dei dettagli dell'attività con ID",
+    "placeholders": {
+      "id": {}
+    }
+  },
+  "setting_theme": "Cambia Tema",
+  "@setting_theme": {
+    "description": "Etichetta per l'impostazione del tema"
+  },
+  "setting_theme_system": "Sistema",
+  "@setting_theme_system": {
+    "description": "Opzione per il tema di sistema"
+  },
+  "setting_language": "Cambia Lingua",
+  "@setting_language": {
+    "description": "Etichetta per l'impostazione della lingua"
+  },
+  "setting_language_dialog_input_hint": "Cerca lingua...",
+  "@setting_language_dialog_input_hint": {
+    "description": "Suggerimento per l'input di ricerca nella finestra di dialogo della lingua"
+  },
+  "setting_language_dialog_close_button": "Chiudi",
+  "@setting_language_dialog_close_button": {
+    "description": "Etichetta per il pulsante di chiusura nella finestra di dialogo della lingua"
   }
 }

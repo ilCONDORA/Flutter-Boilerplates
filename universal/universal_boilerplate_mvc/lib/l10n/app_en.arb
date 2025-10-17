@@ -1,12 +1,64 @@
 {
-  "@@comment": "English - US",
+  "@@comment": "English",
   "@@locale": "en",
-  "app_name": "Application Example Internationalization",
-  "@app_name": {
-    "description": "Title of the Application Example Internationalization"
+  "languageName": "English",
+  "@languageName": {
+    "description": "Name of the language in English"
   },
-  "example_text": "This text is an example, trash can is US specific",
+  "example_text": "Example text in English",
   "@example_text": {
-    "description": "This text will show how the language change works"
+    "description": "An example text translated into English"
+  },
+  "tasks_page_title": "My Tasks",
+  "@tasks_page_title": {
+    "description": "Title of the tasks page"
+  },
+  "task_with_id": "Task {id}",
+  "@task_with_id": {
+    "description": "Title of the task with ID",
+    "placeholders": {
+      "id": {}
+    }
+  },
+  "task_description_with_id": "Description of task with id {id}",
+  "@task_description_with_id": {
+    "description": "Description of the task with ID",
+    "placeholders": {
+      "id": {}
+    }
+  },
+  "task_detail_page_with_id": "Task Detail Page with ID: {id}",
+  "@task_detail_page_with_id": {
+    "description": "Description of the task detail page with ID",
+    "placeholders": {
+      "id": {}
+    }
+  },
+  "task_detail_page_error_with_id": "Error loading task details with ID: {id}",
+  "@task_detail_page_error_with_id": {
+    "description": "Error message for loading task details with ID",
+    "placeholders": {
+      "id": {}
+    }
+  },
+  "setting_theme": "Change Theme",
+  "@setting_theme": {
+    "description": "Label for the theme setting"
+  },
+  "setting_theme_system": "System",
+  "@setting_theme_system": {
+    "description": "Option for system theme"
+  },
+  "setting_language": "Change Language",
+  "@setting_language": {
+    "description": "Label for the language setting"
+  },
+  "setting_language_dialog_input_hint": "Search language...",
+  "@setting_language_dialog_input_hint": {
+    "description": "Input hint for the language dialog search"
+  },
+  "setting_language_dialog_close_button": "Close",
+  "@setting_language_dialog_close_button": {
+    "description": "Label for the close button in the language dialog"
   }
 }

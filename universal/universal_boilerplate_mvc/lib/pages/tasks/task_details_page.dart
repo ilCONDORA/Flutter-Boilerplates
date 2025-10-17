@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../l10n/app_localizations.dart';
+
 class TaskDetailsPage extends StatelessWidget {
   const TaskDetailsPage({super.key, required this.id});
   final int? id;
@@ -22,8 +24,12 @@ class TaskDetailsPage extends StatelessWidget {
           child: Center(
             child: Text(
               id != null
-                  ? 'Task Details Screen with ID: $id'
-                  : 'Error retrieving ID',
+                  ? AppLocalizations.of(
+                    context,
+                  )!.task_detail_page_with_id(id.toString())
+                  : AppLocalizations.of(
+                    context,
+                  )!.task_detail_page_error_with_id(id.toString()),
               style: TextStyle(fontSize: 24),
             ),
           ),

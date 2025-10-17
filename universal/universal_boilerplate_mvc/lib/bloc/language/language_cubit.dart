@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 
 import '../../l10n/l10n.dart';
@@ -18,7 +19,7 @@ part 'language_state.dart';
 class LanguageCubit extends HydratedCubit<LanguageState> {
   static const Locale _defaultLanguage = Locale('en', 'US');
 
-  /// Constructor for [LanguageCubit]. It uses the constructor of [LanguageState] that requires an initial active language and [isInitialized] but this one is false by default
+  /// Constructor for [LanguageCubit]. It uses the constructor of [LanguageState] that requires an initial active language and [LanguageState.isInitialized] but this one is false by default
   /// and no one is allowed to change it except the [autoInitialize] method.
   ///
   /// This initial(default) language will be overridden by the [autoInitialize] method when it's called in the [BlocProvider].
@@ -27,11 +28,11 @@ class LanguageCubit extends HydratedCubit<LanguageState> {
 
   /// Method that needs to be called to initialize the language settings based on the system locale.
   ///
-  /// When you start the app for the first time the if statement will return false because [state.isInitialized] will be equal to false because
+  /// When you start the app for the first time the if statement will return false because [LanguageState.isInitialized] will be equal to false because
   /// it is set to false by default in the constructor of [LanguageState], and then it will get the system locale using [PlatformDispatcher.instance.locale] and
   /// by calling the [_findBestSupportedLanguage] method it will find the closest supported language to the system locale and set it as the active language.
   ///
-  /// All the other times you open the app, the if statement will return true because [state.isInitialized] will be equal to true, so it will not trigger the initialization process again and
+  /// All the other times you open the app, the if statement will return true because [LanguageState.isInitialized] will be equal to true, so it will not trigger the initialization process again and
   /// the active language will remain the same as the one set in the previous initialization thanks to the [HydratedCubit] implementation that saves the state in the local storage.
   ///
   void autoInitialize() {

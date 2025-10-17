@@ -15,9 +15,11 @@ import 'app_localizations.dart';
 ///
 class L10n {
   static final supportedLanguages = [
-    const Locale('en', 'US'),
-    const Locale('en', 'GB'),
-    const Locale('it', 'IT'),
+    //const Locale('en', 'US'),
+    //const Locale('en', 'GB'),
+    //const Locale('it', 'IT'),
+    const Locale('it'),
+    const Locale('en'),
   ];
 
   static const localizationsDelegates = [

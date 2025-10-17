@@ -62,7 +62,8 @@ import 'app_localizations_it.dart';
 /// be consistent with the languages listed in the AppLocalizations.supportedLocales
 /// property.
 abstract class AppLocalizations {
-  AppLocalizations(String locale) : localeName = intl.Intl.canonicalizedLocale(locale.toString());
+  AppLocalizations(String locale)
+    : localeName = intl.Intl.canonicalizedLocale(locale.toString());
 
   final String localeName;
 
@@ -70,7 +71,8 @@ abstract class AppLocalizations {
     return Localizations.of<AppLocalizations>(context, AppLocalizations);
   }
 
-  static const LocalizationsDelegate<AppLocalizations> delegate = _AppLocalizationsDelegate();
+  static const LocalizationsDelegate<AppLocalizations> delegate =
+      _AppLocalizationsDelegate();
 
   /// A list of this localizations delegate along with the default localizations
   /// delegates.
@@ -82,34 +84,95 @@ abstract class AppLocalizations {
   /// Additional delegates can be added by appending to this list in
   /// MaterialApp. This list does not have to be used at all if a custom list
   /// of delegates is preferred or required.
-  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates = <LocalizationsDelegate<dynamic>>[
-    delegate,
-    GlobalMaterialLocalizations.delegate,
-    GlobalCupertinoLocalizations.delegate,
-    GlobalWidgetsLocalizations.delegate,
-  ];
+  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates =
+      <LocalizationsDelegate<dynamic>>[
+        delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ];
 
   /// A list of this localizations delegate's supported locales.
   static const List<Locale> supportedLocales = <Locale>[
     Locale('en'),
-    Locale('en', 'GB'),
-    Locale('it')
+    Locale('it'),
   ];
 
-  /// Title of the Application Example Internationalization
+  /// Name of the language in English
   ///
   /// In en, this message translates to:
-  /// **'Application Example Internationalization'**
-  String get app_name;
+  /// **'English'**
+  String get languageName;
 
-  /// This text will show how the language change works
+  /// An example text translated into English
   ///
   /// In en, this message translates to:
-  /// **'This text is an example, trash can is US specific'**
+  /// **'Example text in English'**
   String get example_text;
+
+  /// Title of the tasks page
+  ///
+  /// In en, this message translates to:
+  /// **'My Tasks'**
+  String get tasks_page_title;
+
+  /// Title of the task with ID
+  ///
+  /// In en, this message translates to:
+  /// **'Task {id}'**
+  String task_with_id(Object id);
+
+  /// Description of the task with ID
+  ///
+  /// In en, this message translates to:
+  /// **'Description of task with id {id}'**
+  String task_description_with_id(Object id);
+
+  /// Description of the task detail page with ID
+  ///
+  /// In en, this message translates to:
+  /// **'Task Detail Page with ID: {id}'**
+  String task_detail_page_with_id(Object id);
+
+  /// Error message for loading task details with ID
+  ///
+  /// In en, this message translates to:
+  /// **'Error loading task details with ID: {id}'**
+  String task_detail_page_error_with_id(Object id);
+
+  /// Label for the theme setting
+  ///
+  /// In en, this message translates to:
+  /// **'Change Theme'**
+  String get setting_theme;
+
+  /// Option for system theme
+  ///
+  /// In en, this message translates to:
+  /// **'System'**
+  String get setting_theme_system;
+
+  /// Label for the language setting
+  ///
+  /// In en, this message translates to:
+  /// **'Change Language'**
+  String get setting_language;
+
+  /// Input hint for the language dialog search
+  ///
+  /// In en, this message translates to:
+  /// **'Search language...'**
+  String get setting_language_dialog_input_hint;
+
+  /// Label for the close button in the language dialog
+  ///
+  /// In en, this message translates to:
+  /// **'Close'**
+  String get setting_language_dialog_close_button;
 }
 
-class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
+class _AppLocalizationsDelegate
+    extends LocalizationsDelegate<AppLocalizations> {
   const _AppLocalizationsDelegate();
 
   @override
@@ -118,34 +181,26 @@ class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> 
   }
 
   @override
-  bool isSupported(Locale locale) => <String>['en', 'it'].contains(locale.languageCode);
+  bool isSupported(Locale locale) =>
+      <String>['en', 'it'].contains(locale.languageCode);
 
   @override
   bool shouldReload(_AppLocalizationsDelegate old) => false;
 }
 
 AppLocalizations lookupAppLocalizations(Locale locale) {
-
-  // Lookup logic when language+country codes are specified.
-  switch (locale.languageCode) {
-    case 'en': {
-  switch (locale.countryCode) {
-    case 'GB': return AppLocalizationsEnGb();
-   }
-  break;
-   }
-  }
-
   // Lookup logic when only language code is specified.
   switch (locale.languageCode) {
-    case 'en': return AppLocalizationsEn();
-    case 'it': return AppLocalizationsIt();
+    case 'en':
+      return AppLocalizationsEn();
+    case 'it':
+      return AppLocalizationsIt();
   }
 
   throw FlutterError(
     'AppLocalizations.delegate failed to load unsupported locale "$locale". This is likely '
     'an issue with the localizations generation tool. Please file an issue '
     'on GitHub with a reproducible sample app and the gen-l10n configuration '
-    'that was used.'
+    'that was used.',
   );
 }

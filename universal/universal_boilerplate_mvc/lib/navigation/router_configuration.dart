@@ -18,30 +18,39 @@ final rootNavigatorKey = GlobalKey<NavigatorState>();
 ///
 class RouterConfiguration {
   static final GoRouter config = GoRouter(
-    initialLocation: '/',
+    redirect: (context, state) {
+      if (state.uri.toString() == '/') {
+        return '/home';
+      }
+
+      return null;
+    },
+    initialLocation: '/home',
     navigatorKey: rootNavigatorKey,
     routes: [
-      ShellRoute(
-        routes: _convertToGoRoutes(routesDeclarationList),
+      StatefulShellRoute.indexedStack(
+        branches: _convertToStatefulShellBranches(
+          propRoutesDeclarationList: routesDeclarationList,
+        ),
         builder:
-            (context, state, child) => LayoutDispatcher(screenWidget: child),
+            (context, state, navigationShell) =>
+                LayoutDispatcher(navigationShell: navigationShell),
       ),
     ],
   );
 }
 
-/// Convert a list of [RoutesDeclaration] into a list of [GoRoute].
-/// This is used to create the routes for the [GoRouter].
+/// Convert a list of [RoutesDeclaration] into a list of [StatefulShellBranch].
+/// This is used to create branches for the [StatefulShellRoute].
+/// Each branch corresponds to a main route and its children routes.
 ///
-/// Here we can see that this method is called inside itself recursively to convert the routes.
+/// Also we can see that we use the [RoutesDeclaration.toStatefulShellBranch] method to convert the routes of each branch.
+/// This allows us to keep the routes declaration clean and organized.
 ///
-List<GoRoute> _convertToGoRoutes(List<RoutesDeclaration> routesDeclaration) {
-  return routesDeclaration.map((route) {
-    return GoRoute(
-      name: route.name,
-      path: route.path,
-      builder: (context, state) => route.pageBuilder(context, state),
-      routes: route.routes.isNotEmpty ? _convertToGoRoutes(route.routes) : [],
-    );
-  }).toList();
+List<StatefulShellBranch> _convertToStatefulShellBranches({
+  required List<RoutesDeclaration> propRoutesDeclarationList,
+}) {
+  return propRoutesDeclarationList
+      .map((route) => route.toStatefulShellBranch())
+      .toList();
 }

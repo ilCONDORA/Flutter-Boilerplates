@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
-import '../navigation/my_bottom_nav_bar.dart';
+import '../navigation/custom_bottom_nav_bar.dart';
 
 /// [LayoutDispatcher] is responsible for showing all the pages that need an app bar.
 ///
 class LayoutDispatcher extends StatelessWidget {
-  const LayoutDispatcher({super.key, required this.screenWidget});
+  const LayoutDispatcher({super.key, required this.navigationShell});
 
-  final Widget screenWidget;
+  final StatefulNavigationShell navigationShell;
 
   @override
   Widget build(BuildContext context) {
@@ -50,13 +51,13 @@ class LayoutDispatcher extends StatelessWidget {
                   ),
                 ),
               ),
-              Expanded(child: screenWidget),
+              Expanded(child: navigationShell),
             ],
           ),
         ),
         bottomNavigationBar: Offstage(
           offstage: !showBottomNavBar,
-          child: MyBottomNavBar(),
+          child: CustomBottomNavBar(navigationShell: navigationShell),
         ),
       ),
     );

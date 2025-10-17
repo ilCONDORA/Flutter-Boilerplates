@@ -1,27 +1,41 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
-import 'package:universal_boilerplate_mvc/bloc/window_manager/window_manager_cubit.dart';
 import 'package:window_manager/window_manager.dart';
 
+import '../bloc/window_manager/window_manager_cubit.dart';
 import '../main.dart';
+
+// Lazily instantiate the cubit to avoid creating a HydratedCubit before
+// HydratedBloc.storage is configured in `main()` (imports run at app
+// initialization time). This prevents initialization-order issues.
+WindowManagerCubit? _windowManagerCubit;
+WindowManagerCubit get windowManagerCubit {
+  _windowManagerCubit ??= WindowManagerCubit();
+  return _windowManagerCubit!;
+}
+
+/// Close and clear the lazily-created cubit (useful for tests or app teardown).
+Future<void> disposeWindowManagerCubit() async {
+  await _windowManagerCubit?.close();
+  _windowManagerCubit = null;
+}
 
 Future<bool> activateWindowManager() async {
   // We use the if statement to cut off the window management system.
   if (!kIsWeb && (Platform.isWindows || Platform.isMacOS || Platform.isLinux)) {
     await windowManager.ensureInitialized();
 
-    final windowState = WindowManagerCubit().state;
+    final windowState = windowManagerCubit.state;
 
     // This variable has a lot of options, we are going to use the size, center and minimumSize.
     WindowOptions windowOptions = WindowOptions(
-      size:
-          windowState
-              .windowSize, // At first launch it will be null and id doesn't give any errors but after that it will use the size saved in the state.
-      center:
-          windowState.windowPosition ==
-          null, // If the position is null, so after the first launch, it will center the window and after it will use the position saved in the state.
+      // At first launch it will be null and id doesn't give any errors but after that it will use the size saved in the state.
+      size: windowState.windowSize,
+      // If the position is null, so after the first launch, it will center the window and after it will use the position saved in the state.
+      center: windowState.windowPosition == null,
       minimumSize: Size(700, 600),
     );
 
@@ -54,8 +68,6 @@ class WindowManagerWrapper extends StatefulWidget {
 
 class _WindowManagerWrapperState extends State<WindowManagerWrapper>
     with WindowListener {
-  final WindowManagerCubit windowCubit = WindowManagerCubit();
-
   @override
   void initState() {
     super.initState();
@@ -65,28 +77,43 @@ class _WindowManagerWrapperState extends State<WindowManagerWrapper>
   @override
   void onWindowMaximize() {
     if (mounted) {
-      windowCubit.changeWindowMaximizedState(true);
+      windowManagerCubit.changeWindowMaximizedState();
     }
   }
 
   @override
   void onWindowUnmaximize() {
     if (mounted) {
-      windowCubit.changeWindowMaximizedState(false);
+      windowManagerCubit.changeWindowMaximizedState();
     }
   }
 
   @override
   void onWindowResize() async {
     if (mounted) {
-      windowCubit.changeWindowSize(await windowManager.getSize());
+      windowManagerCubit.changeWindowSize(await windowManager.getSize());
+      windowManagerCubit.changeWindowPosition(
+        await windowManager.getPosition(),
+      );
     }
   }
 
   @override
   void onWindowMove() async {
     if (mounted) {
-      windowCubit.changeWindowPosition(await windowManager.getPosition());
+      windowManagerCubit.changeWindowPosition(
+        await windowManager.getPosition(),
+      );
+    }
+  }
+
+  @override
+  void onWindowBlur() async {
+    if (mounted) {
+      windowManagerCubit.changeWindowSize(await windowManager.getSize());
+      windowManagerCubit.changeWindowPosition(
+        await windowManager.getPosition(),
+      );
     }
   }
 
