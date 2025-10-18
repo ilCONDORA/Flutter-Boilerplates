@@ -5,6 +5,18 @@
   "@languageName": {
     "description": "Nome della lingua in italiano"
   },
+  "home_route_name": "Home",
+  "@home_route_name": {
+    "description": "Nome della rotta Home"
+  },
+  "tasks_route_name": "Attività",
+  "@tasks_route_name": {
+    "description": "Nome della rotta Attività"
+  },
+  "task_details_route_name": "Dettagli Attività",
+  "@task_details_route_name": {
+    "description": "Nome della rotta Dettagli Attività"
+  },
   "example_text": "Testo di esempio in italiano",
   "@example_text": {
     "description": "Un testo di esempio tradotto in italiano"

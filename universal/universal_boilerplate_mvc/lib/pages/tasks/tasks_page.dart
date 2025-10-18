@@ -26,7 +26,7 @@ class TasksPage extends StatelessWidget {
                   icon: Icon(Icons.arrow_forward),
                   onPressed:
                       () => GoRouter.of(context).goNamed(
-                        DefinedRoutesNames.taskDetails,
+                        DefinedRoutes.taskDetails.name,
                         pathParameters: {'id': i.toString()},
                       ),
                 ),

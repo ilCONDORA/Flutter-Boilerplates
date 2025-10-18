@@ -1,50 +1,76 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
+import '../l10n/app_localizations.dart';
 import '../pages/tasks/tasks_page.dart';
 import '../pages/tasks/task_details_page.dart';
 import '../pages/home/home_page.dart';
+import 'route_declaration_model.dart';
 
-/// This class holds the names of all the routes that will be assigned
-/// to the routes in all [GoRoute]s.
-/// This will also be used when using the [GoRouter.goNamed] method
-/// to navigate to the routes.
+/// This is an enhanced enum. The difference with a regular enum is that we can define an enum with some properties and create some methods for it.
 ///
-class DefinedRoutesNames {
-  static const home = 'Home';
-  static const tasks = 'Tasks';
-  static const taskDetails = 'Task Details';
+/// Here we define an enum to hold the route names and their paths.
+/// When defining an enum we need to associate a path to it and to access the path we can use the [path] property by calling it on the enum value.
+///
+/// We also define a method [getLocalizedName] to get the localized name of the route based on the context it receives.
+///
+/// For example:
+/// ```dart
+/// DefinedRoutes.home.name // returns 'home'
+/// DefinedRoutes.home.path // returns '/home'
+/// DefinedRoutes.tasks.getLocalizedName(context) // returns the localized name for the tasks route
+/// ```
+///
+enum DefinedRoutes {
+  home(path: '/home'),
+  tasks(path: '/tasks'),
+  taskDetails(path: ':id/details');
+
+  const DefinedRoutes({
+    required this.path,
+  });
+
+  final String path;
+
+  String getLocalizedName(BuildContext context) {
+    switch (this) {
+      case DefinedRoutes.home:
+        return AppLocalizations.of(context)!.home_route_name;
+      case DefinedRoutes.tasks:
+        return AppLocalizations.of(context)!.tasks_route_name;
+      case DefinedRoutes.taskDetails:
+        return AppLocalizations.of(context)!.task_details_route_name;
+    }
+  }
 }
 
-/// This list holds the specification of all the routes that will be build.
+/// This list holds the specification of all the routes that will be build and rendered by the primary navigation.
 ///
-final List<RoutesDeclaration> routesDeclarationList = [
+final List<RouteDeclarationModel> routesDeclarationList = [
   ...bottomNavigationRoutes,
 ];
 
-/// This list holds the specification of all the routes that will be shown
-/// in the bottom navigation bar.
+/// This list holds the specification of all the routes that will be shown in the bottom navigation bar.
 ///
-/// The order matters because it's the order in which they will be shown.
+///! THE ORDER MATTERS because it's the order in which they will be shown.
 ///
-final List<RoutesDeclaration> bottomNavigationRoutes = [
-  RoutesDeclaration(
-    name: DefinedRoutesNames.home,
-    path: '/home',
+final List<RouteDeclarationModel> bottomNavigationRoutes = [
+  RouteDeclarationModel(
+    name: DefinedRoutes.home.name,
+    path: DefinedRoutes.home.path,
     pageBuilder: (context, state) => HomePage(key: state.pageKey),
     icon: Icons.home_outlined,
     selectedIcon: Icons.home,
   ),
-  RoutesDeclaration(
-    name: DefinedRoutesNames.tasks,
-    path: '/tasks',
+  RouteDeclarationModel(
+    name: DefinedRoutes.tasks.name,
+    path: DefinedRoutes.tasks.path,
     pageBuilder: (context, state) => TasksPage(key: state.pageKey),
     icon: Icons.all_inbox_outlined,
     selectedIcon: Icons.all_inbox,
     routes: [
-      RoutesDeclaration(
-        name: DefinedRoutesNames.taskDetails,
-        path: ':id/details',
+      RouteDeclarationModel(
+        name: DefinedRoutes.taskDetails.name,
+        path: DefinedRoutes.taskDetails.path,
         pageBuilder: (context, state) {
           final String? id = state.pathParameters['id'];
           final int? idInt = int.tryParse(id ?? '');
@@ -55,54 +81,3 @@ final List<RoutesDeclaration> bottomNavigationRoutes = [
     ],
   ),
 ];
-
-/// [RoutesDeclaration] is used to define all the data related to a route.
-///
-/// [pageBuilder], as the name implies, is used to build the page and it's a
-/// method because it needs the [BuildContext] and [GoRouterState];
-/// We can use [GoRouterState] to get the pathParameters, queryParameters, etc.
-///
-/// The [icon] and [selectedIcon] are used by the navigation code, that's why it's optional.
-///
-/// This class also contains methods to convert itself into a [GoRoute] or a [StatefulShellBranch].
-/// The conversion methods make the conversion logic owned by the declaration itself.
-///
-class RoutesDeclaration {
-  final String name;
-  final String path;
-  final Widget Function(BuildContext context, GoRouterState state) pageBuilder;
-  final List<RoutesDeclaration> routes;
-  final IconData? icon;
-  final IconData? selectedIcon;
-
-  RoutesDeclaration({
-    required this.name,
-    required this.path,
-    required this.pageBuilder,
-    this.routes = const <RoutesDeclaration>[],
-    this.icon,
-    this.selectedIcon,
-  });
-
-  /// Convert this declaration and its children into a [GoRoute].
-  ///
-  /// This makes conversion logic owned by the declaration itself.
-  ///
-  GoRoute toGoRoute() {
-    return GoRoute(
-      name: name,
-      path: path,
-      builder: (context, state) => pageBuilder(context, state),
-      routes:
-          routes.isNotEmpty ? routes.map((r) => r.toGoRoute()).toList() : [],
-    );
-  }
-
-  /// Convert this declaration into a [StatefulShellBranch].
-  ///
-  /// The branch contains a single top-level [GoRoute] (this declaration)
-  ///
-  StatefulShellBranch toStatefulShellBranch() {
-    return StatefulShellBranch(routes: [toGoRoute()]);
-  }
-}

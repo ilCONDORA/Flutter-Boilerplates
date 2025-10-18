@@ -110,6 +110,24 @@ abstract class AppLocalizations {
   /// **'Example text in English'**
   String get example_text;
 
+  /// Name of the Home route
+  ///
+  /// In en, this message translates to:
+  /// **'Home'**
+  String get home_route_name;
+
+  /// Name of the Tasks route
+  ///
+  /// In en, this message translates to:
+  /// **'Tasks'**
+  String get tasks_route_name;
+
+  /// Name of the Task Details route
+  ///
+  /// In en, this message translates to:
+  /// **'Task Details'**
+  String get task_details_route_name;
+
   /// Title of the tasks page
   ///
   /// In en, this message translates to:

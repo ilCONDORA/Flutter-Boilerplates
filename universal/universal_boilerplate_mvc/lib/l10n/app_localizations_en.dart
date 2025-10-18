@@ -15,6 +15,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get example_text => 'Example text in English';
 
   @override
+  String get home_route_name => 'Home';
+
+  @override
+  String get tasks_route_name => 'Tasks';
+
+  @override
+  String get task_details_route_name => 'Task Details';
+
+  @override
   String get tasks_page_title => 'My Tasks';
 
   @override

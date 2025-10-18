@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 
 import '../layout/layout_dispatcher.dart';
 import 'routes_declaration.dart';
+import 'route_declaration_model.dart';
 
 /// This variable holds the all the data related to the routes.
 /// It's also used when we need to display dialogs and etc. at the root level.
@@ -29,9 +30,7 @@ class RouterConfiguration {
     navigatorKey: rootNavigatorKey,
     routes: [
       StatefulShellRoute.indexedStack(
-        branches: _convertToStatefulShellBranches(
-          propRoutesDeclarationList: routesDeclarationList,
-        ),
+        branches: routesDeclarationList.convertToStatefulShellBranches(),
         builder:
             (context, state, navigationShell) =>
                 LayoutDispatcher(navigationShell: navigationShell),
@@ -40,17 +39,13 @@ class RouterConfiguration {
   );
 }
 
-/// Convert a list of [RoutesDeclaration] into a list of [StatefulShellBranch].
-/// This is used to create branches for the [StatefulShellRoute].
-/// Each branch corresponds to a main route and its children routes.
+/// Extensions are a way to add functionality to existing data types.
+/// Here we add a method to the [RouteDeclarationModel] list type to convert it to a list of [StatefulShellBranch].
 ///
-/// Also we can see that we use the [RoutesDeclaration.toStatefulShellBranch] method to convert the routes of each branch.
-/// This allows us to keep the routes declaration clean and organized.
-///
-List<StatefulShellBranch> _convertToStatefulShellBranches({
-  required List<RoutesDeclaration> propRoutesDeclarationList,
-}) {
-  return propRoutesDeclarationList
-      .map((route) => route.toStatefulShellBranch())
-      .toList();
+extension on List<RouteDeclarationModel> {
+  /// Convert this list of [RouteDeclarationModel] into a list of [StatefulShellBranch].
+  ///
+  List<StatefulShellBranch> convertToStatefulShellBranches() {
+    return map((route) => route.toStatefulShellBranch()).toList();
+  }
 }

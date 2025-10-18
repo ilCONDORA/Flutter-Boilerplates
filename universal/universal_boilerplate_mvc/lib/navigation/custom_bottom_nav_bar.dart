@@ -48,7 +48,13 @@ class CustomBottomNavBar extends StatelessWidget {
                     Icons.error,
               ),
               selectedColor: AppColors.airForceBlue.darker,
-              title: Text(routeDeclaration.name),
+              title: Text(
+                DefinedRoutes.values
+                    .firstWhere(
+                      (element) => element.name == routeDeclaration.name,
+                    )
+                    .getLocalizedName(context),
+              ),
             );
           }).toList(),
     );
