@@ -38,14 +38,3 @@ class RouterConfiguration {
     ],
   );
 }
-
-/// Extensions are a way to add functionality to existing data types.
-/// Here we add a method to the [RouteDeclarationModel] list type to convert it to a list of [StatefulShellBranch].
-///
-extension on List<RouteDeclarationModel> {
-  /// Convert this list of [RouteDeclarationModel] into a list of [StatefulShellBranch].
-  ///
-  List<StatefulShellBranch> convertToStatefulShellBranches() {
-    return map((route) => route.toStatefulShellBranch()).toList();
-  }
-}

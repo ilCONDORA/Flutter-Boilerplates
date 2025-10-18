@@ -32,13 +32,16 @@ enum DefinedRoutes {
   final String path;
 
   String getLocalizedName(BuildContext context) {
+    final AppLocalizations al = AppLocalizations.of(context)!;
+    final String nln = 'No Localization needed';
+
     switch (this) {
       case DefinedRoutes.home:
-        return AppLocalizations.of(context)!.home_route_name;
+        return al.home_route_name;
       case DefinedRoutes.tasks:
-        return AppLocalizations.of(context)!.tasks_route_name;
+        return al.tasks_route_name;
       case DefinedRoutes.taskDetails:
-        return AppLocalizations.of(context)!.task_details_route_name;
+        return al.task_details_route_name;
     }
   }
 }
@@ -55,22 +58,19 @@ final List<RouteDeclarationModel> routesDeclarationList = [
 ///
 final List<RouteDeclarationModel> bottomNavigationRoutes = [
   RouteDeclarationModel(
-    name: DefinedRoutes.home.name,
-    path: DefinedRoutes.home.path,
+    definedRoute: DefinedRoutes.home,
     pageBuilder: (context, state) => HomePage(key: state.pageKey),
     icon: Icons.home_outlined,
     selectedIcon: Icons.home,
   ),
   RouteDeclarationModel(
-    name: DefinedRoutes.tasks.name,
-    path: DefinedRoutes.tasks.path,
+    definedRoute: DefinedRoutes.tasks,
     pageBuilder: (context, state) => TasksPage(key: state.pageKey),
     icon: Icons.all_inbox_outlined,
     selectedIcon: Icons.all_inbox,
     routes: [
       RouteDeclarationModel(
-        name: DefinedRoutes.taskDetails.name,
-        path: DefinedRoutes.taskDetails.path,
+        definedRoute: DefinedRoutes.taskDetails,
         pageBuilder: (context, state) {
           final String? id = state.pathParameters['id'];
           final int? idInt = int.tryParse(id ?? '');
