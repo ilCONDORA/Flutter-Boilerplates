@@ -20,6 +20,7 @@ dependencies:
   dynamic_path_url_strategy: ^1.0.0
   window_manager: ^0.5.1
   stylish_bottom_bar: ^1.1.1
+  nested: ^1.0.0
 
 dev_dependencies:
   flutter_test:

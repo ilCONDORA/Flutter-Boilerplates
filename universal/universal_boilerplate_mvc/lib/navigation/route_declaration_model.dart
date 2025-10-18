@@ -42,10 +42,13 @@ class RouteDeclarationModel {
     return GoRoute(
       name: name,
       path: path,
-      builder: (context, state) => pageBuilder(context, state),
-      routes: routes.isNotEmpty
-          ? routes.map((r) => r.toGoRoute()).toList()
-          : [],
+      builder:
+          (BuildContext context, GoRouterState state) =>
+              pageBuilder(context, state),
+      routes:
+          routes.isNotEmpty
+              ? routes.map((RouteDeclarationModel r) => r.toGoRoute()).toList()
+              : <RouteBase>[],
     );
   }
 
@@ -54,7 +57,7 @@ class RouteDeclarationModel {
   /// The branch contains a single top-level [GoRoute] (this declaration)
   ///
   StatefulShellBranch toStatefulShellBranch() {
-    return StatefulShellBranch(routes: [toGoRoute()]);
+    return StatefulShellBranch(routes: <RouteBase>[toGoRoute()]);
   }
 }
 
@@ -65,6 +68,8 @@ extension ListRouteDeclarationModelExtension on List<RouteDeclarationModel> {
   /// Convert this list of [RouteDeclarationModel] into a list of [StatefulShellBranch].
   ///
   List<StatefulShellBranch> convertToStatefulShellBranches() {
-    return map((route) => route.toStatefulShellBranch()).toList();
+    return map(
+      (RouteDeclarationModel route) => route.toStatefulShellBranch(),
+    ).toList();
   }
 }

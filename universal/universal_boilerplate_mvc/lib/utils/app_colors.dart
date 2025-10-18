@@ -16,8 +16,8 @@ extension AppColorExtension on Color {
   /// The optional [amount] is how much to reduce lightness (0.0 - 1.0).
   /// Default is 0.20 (20% darker).
   Color darken([double amount = 0.20]) {
-    final hsl = HSLColor.fromColor(this);
-    final lightness = (hsl.lightness - amount).clamp(0.0, 1.0);
+    final HSLColor hsl = HSLColor.fromColor(this);
+    final double lightness = (hsl.lightness - amount).clamp(0.0, 1.0);
     return hsl.withLightness(lightness).toColor();
   }
 
@@ -29,8 +29,8 @@ extension AppColorExtension on Color {
   /// The optional [amount] is how much to increase lightness (0.0 - 1.0).
   /// Default is 0.20 (20% lighter).
   Color lighten([double amount = 0.20]) {
-    final hsl = HSLColor.fromColor(this);
-    final lightness = (hsl.lightness + amount).clamp(0.0, 1.0);
+    final HSLColor hsl = HSLColor.fromColor(this);
+    final double lightness = (hsl.lightness + amount).clamp(0.0, 1.0);
     return hsl.withLightness(lightness).toColor();
   }
 

@@ -25,7 +25,7 @@ class LayoutDispatcher extends StatelessWidget {
           height: windowSize.height,
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
+            children: <Widget>[
               Offstage(
                 offstage: showBottomNavBar,
                 child: Container(
@@ -39,7 +39,7 @@ class LayoutDispatcher extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisSize: MainAxisSize.min,
-                      children: [
+                      children: <Widget>[
                         Text('Side Menu'),
                         Container(
                           height: 2000,

@@ -36,7 +36,7 @@ class LanguageState {
   /// See concrete implementation in [LanguageCubit].
   ///
   Map<String, dynamic> toJson() {
-    return {
+    return <String, dynamic>{
       'languageCode': activeLanguage.languageCode,
       'countryCode': activeLanguage.countryCode,
       'isInitialized': isInitialized,

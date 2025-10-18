@@ -11,7 +11,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
-      slivers: [
+      slivers: <Widget>[
         PaddingWrapper(
           child: SliverToBoxAdapter(child: AppLanguageSettingHandler()),
         ),

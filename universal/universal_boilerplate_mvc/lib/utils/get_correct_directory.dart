@@ -14,13 +14,13 @@ import 'package:path_provider/path_provider.dart';
 /// it will return a custom directory named 'DEBUG_STORAGE' in the current project directory.
 ///
 Future<Directory> getCorrectDirectory() async {
-  final platform = Platform.operatingSystem;
+  final String platform = Platform.operatingSystem;
 
-  if (kDebugMode && ['windows', 'linux', 'macos'].contains(platform)) {
+  if (kDebugMode && <String>['windows', 'linux', 'macos'].contains(platform)) {
     // Get the desktop project directory
-    final projectDirectory = Directory.current;
+    final Directory projectDirectory = Directory.current;
     // Create a debug storage directory
-    final desktopDebugStorageDirectory = Directory(
+    final Directory desktopDebugStorageDirectory = Directory(
       '${projectDirectory.path}/DEBUG_STORAGE',
     );
     // Ensure the directory exists

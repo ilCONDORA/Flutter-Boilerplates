@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
+import 'package:nested/nested.dart';
 
 import 'bloc/language/language_cubit.dart';
 import 'bloc/theme/theme_cubit.dart';
@@ -37,15 +38,17 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: [
+      providers: <SingleChildWidget>[
         BlocProvider<ThemeCubit>(create: (_) => ThemeCubit()),
         // We use the double dot to call the autoInitialize method and also create the instance of LanguageCubit. The single dot only calls the method.
-        BlocProvider(create: (_) => LanguageCubit()..autoInitialize()),
+        BlocProvider<LanguageCubit>(
+          create: (_) => LanguageCubit()..autoInitialize(),
+        ),
       ],
       child: BlocBuilder<ThemeCubit, ThemeState>(
-        builder: (context, themeState) {
+        builder: (BuildContext context, ThemeState themeState) {
           return BlocBuilder<LanguageCubit, LanguageState>(
-            builder: (context, languageState) {
+            builder: (BuildContext context, LanguageState languageState) {
               return MaterialApp.router(
                 title: 'Universal Boilerplate App',
                 debugShowCheckedModeBanner: false,

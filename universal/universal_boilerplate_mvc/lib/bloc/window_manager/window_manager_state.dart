@@ -39,15 +39,21 @@ class WindowManagerState {
   /// See concrete implementation in [WindowManagerCubit].
   ///
   Map<String, dynamic> toJson() {
-    return {
+    return <String, dynamic>{
       'windowSize':
           windowSize == null
               ? null
-              : {'width': windowSize!.width, 'height': windowSize!.height},
+              : <String, double>{
+                'width': windowSize!.width,
+                'height': windowSize!.height,
+              },
       'windowPosition':
           windowPosition == null
               ? null
-              : {'x': windowPosition!.dx, 'y': windowPosition!.dy},
+              : <String, double>{
+                'x': windowPosition!.dx,
+                'y': windowPosition!.dy,
+              },
       'isMaximized': isMaximized,
     };
   }

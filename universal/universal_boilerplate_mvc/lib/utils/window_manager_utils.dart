@@ -28,7 +28,7 @@ Future<bool> activateWindowManager() async {
   if (!kIsWeb && (Platform.isWindows || Platform.isMacOS || Platform.isLinux)) {
     await windowManager.ensureInitialized();
 
-    final windowState = windowManagerCubit.state;
+    final WindowManagerState windowState = windowManagerCubit.state;
 
     // This variable has a lot of options, we are going to use the size, center and minimumSize.
     WindowOptions windowOptions = WindowOptions(

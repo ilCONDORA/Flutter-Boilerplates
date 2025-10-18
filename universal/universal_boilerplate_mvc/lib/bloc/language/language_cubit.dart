@@ -38,8 +38,8 @@ class LanguageCubit extends HydratedCubit<LanguageState> {
   void autoInitialize() {
     if (state.isInitialized) return;
 
-    final systemLocale = PlatformDispatcher.instance.locale;
-    final selectedLanguage = _findBestSupportedLanguage(systemLocale);
+    final Locale systemLocale = PlatformDispatcher.instance.locale;
+    final Locale selectedLanguage = _findBestSupportedLanguage(systemLocale);
 
     emit(state.copyWith(activeLanguage: selectedLanguage, isInitialized: true));
   }
@@ -53,7 +53,7 @@ class LanguageCubit extends HydratedCubit<LanguageState> {
     final List<Locale> supportedLanguages = L10n.supportedLanguages;
 
     // First of all, look for an exact match (language + country).
-    for (final supportedLanguage in supportedLanguages) {
+    for (final Locale supportedLanguage in supportedLanguages) {
       if (supportedLanguage.languageCode == systemLocale.languageCode &&
           supportedLanguage.countryCode == systemLocale.countryCode) {
         return supportedLanguage;
@@ -61,7 +61,7 @@ class LanguageCubit extends HydratedCubit<LanguageState> {
     }
 
     // Then look for a matching only for the language code.
-    for (final supportedLanguage in supportedLanguages) {
+    for (final Locale supportedLanguage in supportedLanguages) {
       if (supportedLanguage.languageCode == systemLocale.languageCode) {
         return supportedLanguage;
       }

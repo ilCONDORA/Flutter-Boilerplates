@@ -25,7 +25,7 @@ class ThemeState {
   /// See concrete implementation in [ThemeCubit].
   ///
   Map<String, dynamic> toJson() {
-    return {'themeMode': themeMode.index};
+    return <String, dynamic>{'themeMode': themeMode.index};
   }
 
   /// Creates a new instance of [ThemeState] from a JSON map.

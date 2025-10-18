@@ -17,7 +17,7 @@ class ThemeSettingHandler extends StatelessWidget {
     required ThemeMode buttonMode,
     Color? selectedForeground,
   }) {
-    final brightness = Theme.of(context).brightness;
+    final Brightness brightness = Theme.of(context).brightness;
 
     return ButtonStyle(
       shape: WidgetStateProperty.all(
@@ -43,7 +43,7 @@ class ThemeSettingHandler extends StatelessWidget {
     return Row(
       mainAxisSize: MainAxisSize.min,
       spacing: 16,
-      children: [
+      children: <Widget>[
         Text(AppLocalizations.of(context)!.setting_theme),
         Container(
           padding:
@@ -60,12 +60,12 @@ class ThemeSettingHandler extends StatelessWidget {
             ),
           ),
           child: BlocBuilder<ThemeCubit, ThemeState>(
-            builder: (context, state) {
-              final themeFromState = state.themeMode;
+            builder: (BuildContext context, ThemeState state) {
+              final ThemeMode themeFromState = state.themeMode;
               return Row(
                 mainAxisSize: MainAxisSize.min,
                 spacing: 6,
-                children: [
+                children: <Widget>[
                   ConstrainedBox(
                     constraints: BoxConstraints(minWidth: 80, minHeight: 40),
                     child: TextButton(

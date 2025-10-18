@@ -1,5 +1,4 @@
-import 'dart:ui';
-
+import 'package:flutter/widgets.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'app_localizations.dart';
@@ -14,7 +13,7 @@ import 'app_localizations.dart';
 /// [localizationsDelegates] is a list of delegates that provide localized resources for the application. Only used in the main.dart file.
 ///
 class L10n {
-  static final supportedLanguages = [
+  static final List<Locale> supportedLanguages = <Locale>[
     //const Locale('en', 'US'),
     //const Locale('en', 'GB'),
     //const Locale('it', 'IT'),
@@ -22,10 +21,11 @@ class L10n {
     const Locale('en'),
   ];
 
-  static const localizationsDelegates = [
-    AppLocalizations.delegate,
-    GlobalMaterialLocalizations.delegate,
-    GlobalWidgetsLocalizations.delegate,
-    GlobalCupertinoLocalizations.delegate,
-  ];
+  static const List<LocalizationsDelegate<Object>> localizationsDelegates =
+      <LocalizationsDelegate<Object>>[
+        AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ];
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../l10n/app_localizations.dart';
 import '../pages/tasks/tasks_page.dart';
@@ -48,36 +49,42 @@ enum DefinedRoutes {
 
 /// This list holds the specification of all the routes that will be build and rendered by the primary navigation.
 ///
-final List<RouteDeclarationModel> routesDeclarationList = [
-  ...bottomNavigationRoutes,
-];
+final List<RouteDeclarationModel> routesDeclarationList =
+    <RouteDeclarationModel>[
+      ...bottomNavigationRoutes,
+    ];
 
 /// This list holds the specification of all the routes that will be shown in the bottom navigation bar.
 ///
 ///! THE ORDER MATTERS because it's the order in which they will be shown.
 ///
-final List<RouteDeclarationModel> bottomNavigationRoutes = [
-  RouteDeclarationModel(
-    definedRoute: DefinedRoutes.home,
-    pageBuilder: (context, state) => HomePage(key: state.pageKey),
-    icon: Icons.home_outlined,
-    selectedIcon: Icons.home,
-  ),
-  RouteDeclarationModel(
-    definedRoute: DefinedRoutes.tasks,
-    pageBuilder: (context, state) => TasksPage(key: state.pageKey),
-    icon: Icons.all_inbox_outlined,
-    selectedIcon: Icons.all_inbox,
-    routes: [
+final List<RouteDeclarationModel> bottomNavigationRoutes =
+    <RouteDeclarationModel>[
       RouteDeclarationModel(
-        definedRoute: DefinedRoutes.taskDetails,
-        pageBuilder: (context, state) {
-          final String? id = state.pathParameters['id'];
-          final int? idInt = int.tryParse(id ?? '');
-
-          return TaskDetailsPage(id: idInt, key: state.pageKey);
-        },
+        definedRoute: DefinedRoutes.home,
+        pageBuilder:
+            (BuildContext context, GoRouterState state) =>
+                HomePage(key: state.pageKey),
+        icon: Icons.home_outlined,
+        selectedIcon: Icons.home,
       ),
-    ],
-  ),
-];
+      RouteDeclarationModel(
+        definedRoute: DefinedRoutes.tasks,
+        pageBuilder:
+            (BuildContext context, GoRouterState state) =>
+                TasksPage(key: state.pageKey),
+        icon: Icons.all_inbox_outlined,
+        selectedIcon: Icons.all_inbox,
+        routes: <RouteDeclarationModel>[
+          RouteDeclarationModel(
+            definedRoute: DefinedRoutes.taskDetails,
+            pageBuilder: (BuildContext context, GoRouterState state) {
+              final String? id = state.pathParameters['id'];
+              final int? idInt = int.tryParse(id ?? '');
+
+              return TaskDetailsPage(id: idInt, key: state.pageKey);
+            },
+          ),
+        ],
+      ),
+    ];

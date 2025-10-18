@@ -9,7 +9,7 @@ class TaskDetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
-      slivers: [
+      slivers: <Widget>[
         SliverAppBar(
           pinned: true,
           floating: false,

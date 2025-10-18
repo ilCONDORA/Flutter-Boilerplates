@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:stylish_bottom_bar/stylish_bottom_bar.dart';
 
 import '../utils/app_colors.dart';
+import 'route_declaration_model.dart';
 import 'routes_declaration.dart';
 
 /// This class creates a custom bottom navigation bar using the [StylishBottomBar] package.
@@ -20,7 +21,7 @@ class CustomBottomNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bottomBarRoutes = bottomNavigationRoutes;
+    final List<RouteDeclarationModel> bottomBarRoutes = bottomNavigationRoutes;
 
     return StylishBottomBar(
       backgroundColor: AppColors.lightOrange.lighten(0.04),
@@ -32,13 +33,13 @@ class CustomBottomNavBar extends StatelessWidget {
       // to the base route). If they tap a different tab, switch branches
       // without changing that branch's current inner stack.
       onTap:
-          (selectedIndex) => navigationShell.goBranch(
+          (int selectedIndex) => navigationShell.goBranch(
             selectedIndex,
             initialLocation:
                 selectedIndex == navigationShell.currentIndex ? true : false,
           ),
       items:
-          bottomBarRoutes.map((routeDeclaration) {
+          bottomBarRoutes.map((RouteDeclarationModel routeDeclaration) {
             return BottomBarItem(
               icon: Icon(routeDeclaration.icon ?? Icons.error),
               unSelectedColor: Colors.grey.shade700,
@@ -51,7 +52,8 @@ class CustomBottomNavBar extends StatelessWidget {
               title: Text(
                 DefinedRoutes.values
                     .firstWhere(
-                      (element) => element.name == routeDeclaration.name,
+                      (DefinedRoutes element) =>
+                          element.name == routeDeclaration.name,
                     )
                     .getLocalizedName(context),
               ),

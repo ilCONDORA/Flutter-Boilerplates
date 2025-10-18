@@ -5,3 +5,4 @@ linter:
   rules:
     prefer_relative_imports: true
     prefer_single_quotes: true
+    always_specify_types: true

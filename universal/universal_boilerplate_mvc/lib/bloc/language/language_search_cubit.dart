@@ -39,10 +39,10 @@ class LanguageSearchCubit extends Cubit<List<Locale>> {
       if (query.isEmpty) {
         emit(allLanguages);
       } else {
-        final formattedQuery = query.toLowerCase().trim();
+        final String formattedQuery = query.toLowerCase().trim();
         emit(
-          allLanguages.where((singleLanguage) {
-            final languageName =
+          allLanguages.where((Locale singleLanguage) {
+            final String languageName =
                 lookupAppLocalizations(
                   singleLanguage,
                 ).languageName.toLowerCase();

@@ -11,7 +11,7 @@ class AppLanguageSettingHandler extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<LanguageCubit, LanguageState>(
-      builder: (context, state) {
+      builder: (BuildContext context, LanguageState state) {
         final Locale selected = state.activeLanguage;
         final String currentName =
             AppLocalizations.of(context)?.languageName ??
@@ -20,11 +20,11 @@ class AppLanguageSettingHandler extends StatelessWidget {
         return Row(
           mainAxisSize: MainAxisSize.min,
           spacing: 16,
-          children: [
+          children: <Widget>[
             Text(AppLocalizations.of(context)!.setting_language),
             OutlinedButton(
               onPressed: () async {
-                final picked = await showGeneralDialog<Locale>(
+                final Locale? picked = await showGeneralDialog<Locale>(
                   context: context,
                   barrierDismissible: true,
                   barrierLabel:
@@ -32,10 +32,13 @@ class AppLanguageSettingHandler extends StatelessWidget {
                         context,
                       ).modalBarrierDismissLabel,
                   pageBuilder:
-                      (dialogContext, animation, secondaryAnimation) =>
-                          _AppLanguagePickerDialog(
-                            initial: selected,
-                          ),
+                      (
+                        BuildContext dialogContext,
+                        Animation<double> animation,
+                        Animation<double> secondaryAnimation,
+                      ) => _AppLanguagePickerDialog(
+                        initial: selected,
+                      ),
                 );
 
                 if (picked != null && picked != selected) {
@@ -45,7 +48,7 @@ class AppLanguageSettingHandler extends StatelessWidget {
                 }
               },
               child: Row(
-                children: [
+                children: <Widget>[
                   Text(currentName),
                   const SizedBox(width: 16),
                   const Icon(Icons.arrow_drop_down),
@@ -68,7 +71,7 @@ class _AppLanguagePickerDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
+    return BlocProvider<LanguageSearchCubit>(
       create: (_) => LanguageSearchCubit(),
       child: _AppLanguagePickerContent(initial: initial),
     );
@@ -92,7 +95,7 @@ class _AppLanguagePickerContent extends StatelessWidget {
           ),
           child: Column(
             mainAxisSize: MainAxisSize.min,
-            children: [
+            children: <Widget>[
               TextFormField(
                 decoration: InputDecoration(
                   hintText:
@@ -102,24 +105,24 @@ class _AppLanguagePickerContent extends StatelessWidget {
                   prefixIcon: Icon(Icons.search),
                 ),
                 onChanged:
-                    (value) =>
+                    (String value) =>
                         context.read<LanguageSearchCubit>().search(value),
               ),
               const SizedBox(height: 12),
               Flexible(
                 child: BlocBuilder<LanguageSearchCubit, List<Locale>>(
-                  builder: (context, filtered) {
+                  builder: (BuildContext context, List<Locale> filtered) {
                     return ListView.separated(
                       shrinkWrap: true,
                       itemCount: filtered.length,
                       separatorBuilder: (_, _) => const Divider(height: 1),
-                      itemBuilder: (context, index) {
-                        final locale = filtered[index];
-                        final languageName =
+                      itemBuilder: (BuildContext context, int index) {
+                        final Locale locale = filtered[index];
+                        final String languageName =
                             lookupAppLocalizations(
                               locale,
                             ).languageName;
-                        final selected =
+                        final bool selected =
                             locale.languageCode == initial.languageCode;
 
                         return ListTile(
@@ -135,7 +138,7 @@ class _AppLanguagePickerContent extends StatelessWidget {
             ],
           ),
         ),
-        actions: [
+        actions: <Widget>[
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
             child: Text(

@@ -8,12 +8,15 @@ import '../../navigation/routes_declaration.dart';
 class TasksPage extends StatelessWidget {
   TasksPage({super.key});
 
-  final List<String> _tasks = List.generate(1000, (index) => '${index + 1}');
+  final List<String> _tasks = List<String>.generate(
+    1000,
+    (int index) => '${index + 1}',
+  );
 
   List<Widget> _buildList(List<String> data, BuildContext context) {
     return data
         .map(
-          (i) => Container(
+          (String i) => Container(
             margin: EdgeInsets.symmetric(horizontal: 16, vertical: 4),
             height: 150,
             child: Card(
@@ -27,7 +30,7 @@ class TasksPage extends StatelessWidget {
                   onPressed:
                       () => GoRouter.of(context).goNamed(
                         DefinedRoutes.taskDetails.name,
-                        pathParameters: {'id': i.toString()},
+                        pathParameters: <String, String>{'id': i.toString()},
                       ),
                 ),
               ),
@@ -40,7 +43,7 @@ class TasksPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
-      slivers: [
+      slivers: <Widget>[
         SliverAppBar(
           pinned: false,
           floating: true,
