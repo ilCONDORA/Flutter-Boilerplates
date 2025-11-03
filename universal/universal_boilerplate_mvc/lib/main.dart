@@ -10,6 +10,7 @@ import 'bloc/theme/theme_cubit.dart';
 import 'l10n/l10n.dart';
 import 'navigation/router_configuration.dart';
 import 'utils/app_colors.dart';
+import 'utils/fade_out_in_page_transition_builder.dart';
 import 'utils/get_correct_directory.dart';
 import 'utils/window_manager_utils.dart';
 
@@ -18,9 +19,7 @@ Future<void> main() async {
 
   HydratedBloc.storage = await HydratedStorage.build(
     storageDirectory:
-        kIsWeb
-            ? HydratedStorageDirectory.web
-            : HydratedStorageDirectory((await getCorrectDirectory()).path),
+        kIsWeb ? HydratedStorageDirectory.web : HydratedStorageDirectory((await getCorrectDirectory()).path),
   );
 
   setPathUrlStrategy();
@@ -60,12 +59,9 @@ class MainApp extends StatelessWidget {
                     brightness: Brightness.light,
                   ),
                   pageTransitionsTheme: PageTransitionsTheme(
-                    builders: Map<
-                      TargetPlatform,
-                      PageTransitionsBuilder
-                    >.fromIterable(
+                    builders: Map<TargetPlatform, PageTransitionsBuilder>.fromIterable(
                       TargetPlatform.values,
-                      value: (_) => const FadeForwardsPageTransitionsBuilder(),
+                      value: (_) => const FadeOutInPageTransitionBuilder(),
                     ),
                   ),
                 ),
@@ -75,12 +71,9 @@ class MainApp extends StatelessWidget {
                     brightness: Brightness.dark,
                   ),
                   pageTransitionsTheme: PageTransitionsTheme(
-                    builders: Map<
-                      TargetPlatform,
-                      PageTransitionsBuilder
-                    >.fromIterable(
+                    builders: Map<TargetPlatform, PageTransitionsBuilder>.fromIterable(
                       TargetPlatform.values,
-                      value: (_) => const FadeForwardsPageTransitionsBuilder(),
+                      value: (_) => const FadeOutInPageTransitionBuilder(),
                     ),
                   ),
                 ),
