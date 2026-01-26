@@ -30,24 +30,24 @@ Future<bool> activateWindowManager() async {
 
     final WindowManagerState windowState = windowManagerCubit.state;
 
-    // This variable has a lot of options, we are going to use the size, center and minimumSize.
-    WindowOptions windowOptions = WindowOptions(
-      // At first launch it will be null and id doesn't give any errors but after that it will use the size saved in the state.
-      size: windowState.windowSize,
-      // If the position is null, so after the first launch, it will center the window and after it will use the position saved in the state.
-      center: windowState.windowPosition == null,
-      minimumSize: Size(700, 600),
-    );
+    await windowManager.waitUntilReadyToShow(WindowOptions(), () async {
+      windowManager.setMinimumSize(const Size(700, 600));
 
-    // After setting the size, constraint and other things we call this method to set other options.
-    // Fun fact: here we have the 'windowManager.setSize' method but it doesn't work, that's why we set the size in the options.
-    windowManager.waitUntilReadyToShow(windowOptions, () async {
+      if (windowState.windowSize != null) {
+        await windowManager.setSize(windowState.windowSize!);
+      }
       if (windowState.windowPosition != null) {
         await windowManager.setPosition(windowState.windowPosition!);
+      } else {
+        await windowManager.center();
       }
       if (windowState.isMaximized) {
         await windowManager.maximize();
       }
+      if (windowState.isFullScreen) {
+        await windowManager.setFullScreen(true);
+      }
+
       await windowManager.show();
       await windowManager.focus();
     });
@@ -66,8 +66,7 @@ class WindowManagerWrapper extends StatefulWidget {
   State<WindowManagerWrapper> createState() => _WindowManagerWrapperState();
 }
 
-class _WindowManagerWrapperState extends State<WindowManagerWrapper>
-    with WindowListener {
+class _WindowManagerWrapperState extends State<WindowManagerWrapper> with WindowListener {
   @override
   void initState() {
     super.initState();
@@ -91,29 +90,42 @@ class _WindowManagerWrapperState extends State<WindowManagerWrapper>
   @override
   void onWindowResize() async {
     if (mounted) {
-      windowManagerCubit.changeWindowSize(await windowManager.getSize());
-      windowManagerCubit.changeWindowPosition(
-        await windowManager.getPosition(),
-      );
+      final Size newSize = await windowManager.getSize();
+      final Offset newPosition = await windowManager.getPosition();
+      windowManagerCubit.changeWindowSize(newSize);
+      windowManagerCubit.changeWindowPosition(newPosition);
     }
   }
 
   @override
   void onWindowMove() async {
     if (mounted) {
-      windowManagerCubit.changeWindowPosition(
-        await windowManager.getPosition(),
-      );
+      final Offset newPosition = await windowManager.getPosition();
+      windowManagerCubit.changeWindowPosition(newPosition);
     }
   }
 
   @override
   void onWindowBlur() async {
     if (mounted) {
-      windowManagerCubit.changeWindowSize(await windowManager.getSize());
-      windowManagerCubit.changeWindowPosition(
-        await windowManager.getPosition(),
-      );
+      final Size newSize = await windowManager.getSize();
+      final Offset newPosition = await windowManager.getPosition();
+      windowManagerCubit.changeWindowSize(newSize);
+      windowManagerCubit.changeWindowPosition(newPosition);
+    }
+  }
+
+  @override
+  void onWindowEnterFullScreen() {
+    if (mounted) {
+      windowManagerCubit.changeWindowFullScreenState();
+    }
+  }
+
+  @override
+  void onWindowLeaveFullScreen() {
+    if (mounted) {
+      windowManagerCubit.changeWindowFullScreenState();
     }
   }
 
